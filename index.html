@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confessions Afta Curfew | BuhzzTaylor.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --purple-deep: #1a0030;
+      --purple-mid: #3d0068;
+      --purple-bright: #7b00cc;
+      --pink-hot: #ff2d8f;
+      --pink-light: #ff85c0;
+      --gold: #f5c842;
+      --white: #ffffff;
+      --off-white: #f0e6ff;
+      --text-muted: #b899d4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--purple-deep);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: linear-gradient(to bottom, rgba(26,0,48,0.98), transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: var(--pink-hot);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--off-white);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--pink-hot); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 120px 40px 80px;
+      background: radial-gradient(ellipse at 50% 0%, var(--purple-bright) 0%, var(--purple-mid) 30%, var(--purple-deep) 70%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, var(--purple-deep));
+    }
+
+    .stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 10%, rgba(255,133,192,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 30%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 15%, rgba(255,45,143,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 50%, rgba(255,133,192,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(2px 2px at 45% 70%, rgba(255,45,143,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 80%, rgba(255,133,192,0.4) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-logo {
+      width: 240px;
+      height: 240px;
+      object-fit: contain;
+      margin-bottom: 30px;
+      filter: drop-shadow(0 0 40px rgba(255, 45, 143, 0.6));
+      animation: float 6s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, var(--white) 0%, var(--pink-light) 50%, var(--pink-hot) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink-hot), #cc0070);
+      color: var(--white);
+      padding: 16px 36px;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(255, 45, 143, 0.4);
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255, 45, 143, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 15px 36px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--pink-hot);
+      color: var(--pink-hot);
+      transform: translateY(-3px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION BASE */
+    section {
+      padding: 100px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 3px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, var(--pink-hot), var(--purple-bright));
+      margin: 20px 0 40px;
+    }
+
+    /* LISTEN SECTION */
+    #listen {
+      background: linear-gradient(135deg, rgba(61,0,104,0.4), rgba(26,0,48,0.8));
+      border-top: 1px solid rgba(255,45,143,0.15);
+      border-bottom: 1px solid rgba(255,45,143,0.15);
+    }
+
+    .listen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 60px;
+    }
+
+    .episode-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,45,143,0.2);
+      padding: 30px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .episode-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--pink-hot), var(--purple-bright));
+    }
+
+    .episode-card:hover {
+      border-color: rgba(255,45,143,0.5);
+      transform: translateX(6px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .ep-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--pink-hot);
+      margin-bottom: 8px;
+    }
+
+    .ep-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .ep-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .ep-link {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,45,143,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.3s;
+    }
+
+    .ep-link:hover { border-color: var(--pink-hot); }
+
+    .platform-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .platform-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none;
+      color: var(--white);
+      transition: all 0.3s;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .platform-btn:hover {
+      background: rgba(255,45,143,0.1);
+      border-color: rgba(255,45,143,0.4);
+      transform: translateX(6px);
+    }
+
+    .platform-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* CONFESS SECTION */
+    #confess {
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 50%, rgba(123,0,204,0.2), transparent 70%);
+    }
+
+    .confess-phone {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 6px;
+      background: linear-gradient(135deg, var(--pink-light), var(--pink-hot));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 40px 0 20px;
+      display: block;
+    }
+
+    .confess-instructions {
+      max-width: 500px;
+      margin: 0 auto 50px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .confess-steps {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+
+    .confess-step {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,45,143,0.2);
+      padding: 30px 24px;
+      width: 200px;
+      text-align: center;
+    }
+
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--pink-hot);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .step-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ASK SECTION */
+    #ask {
+      background: linear-gradient(135deg, rgba(26,0,48,0.9), rgba(61,0,104,0.3));
+      border-top: 1px solid rgba(255,45,143,0.1);
+    }
+
+    .ask-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      padding: 14px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--pink-hot);
+    }
+
+    .form-select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .form-select option {
+      background: var(--purple-deep);
+    }
+
+    .form-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--pink-hot), #cc0070);
+      color: var(--white);
+      padding: 18px;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,45,143,0.4);
+    }
+
+    .ask-host {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .host-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,45,143,0.15);
+      padding: 28px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .host-card:hover {
+      border-color: rgba(255,45,143,0.4);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .host-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-hot), var(--purple-bright));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .host-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .host-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* BOOK SECTION */
+    #book {
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 100%, rgba(255,45,143,0.1), transparent 60%);
+      border-top: 1px solid rgba(255,45,143,0.1);
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 60px 0;
+    }
+
+    .book-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,45,143,0.15);
+      padding: 36px 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .book-card:hover {
+      border-color: rgba(255,45,143,0.5);
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .book-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .book-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .book-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* TRIBE SECTION */
+    #tribe {
+      background: linear-gradient(135deg, rgba(61,0,104,0.5), rgba(26,0,48,0.9));
+      border-top: 1px solid rgba(255,45,143,0.15);
+      border-bottom: 1px solid rgba(255,45,143,0.15);
+    }
+
+    .tribe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .tribe-benefits {
+      list-style: none;
+      margin: 30px 0;
+    }
+
+    .tribe-benefits li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.9rem;
+      color: var(--off-white);
+    }
+
+    .tribe-benefits li::before {
+      content: '✦';
+      color: var(--pink-hot);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .tribe-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tribe-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,45,143,0.2);
+      padding: 30px;
+      transition: all 0.3s;
+    }
+
+    .tribe-card:hover {
+      border-color: rgba(255,45,143,0.5);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .tribe-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .tribe-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* MERCH SECTION */
+    #merch {
+      text-align: center;
+    }
+
+    .merch-coming {
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,45,143,0.3);
+      padding: 80px 40px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .merch-coming::before {
+      content: 'MERCH';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20vw;
+      color: rgba(255,45,143,0.03);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      letter-spacing: 10px;
+      pointer-events: none;
+    }
+
+    .merch-coming h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+    }
+
+    .merch-coming p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: rgba(0,0,0,0.5);
+      padding: 60px 40px 40px;
+      border-top: 1px solid rgba(255,45,143,0.15);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      color: var(--pink-hot);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover { color: var(--pink-hot); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      border-color: var(--pink-hot);
+      color: var(--pink-hot);
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      section { padding: 70px 20px; }
+      .listen-grid,
+      .ask-grid,
+      .tribe-grid,
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .book-grid { grid-template-columns: 1fr; }
+      .confess-steps { flex-direction: column; align-items: center; }
+      .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+    }
+
+    /* GLOW PULSE */
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255,45,143,0.3); }
+      50% { box-shadow: 0 0 50px rgba(255,45,143,0.6); }
+    }
+
+    .glow { animation: glowPulse 3s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">CAC</a>
+    <ul class="nav-links">
+      <li><a href="#listen">Episodes</a></li>
+      <li><a href="#confess">Confess</a></li>
+      <li><a href="#ask">Ask Us</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a href="#tribe">Tribe</a></li>
+      <li><a href="#merch">Merch</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="stars"></div>
+    <img src="logo.png" alt="Confessions Afta Curfew" class="hero-logo" onerror="this.style.display='none'"/>
+    <span class="hero-eyebrow">Philadelphia's Most Unfiltered Podcast</span>
+    <h1 class="hero-title">Confessions<br/>Afta Curfew</h1>
+    <p class="hero-sub">Where the lights are low, the drinks are poured, and the truth gets louder than the music.</p>
+    <div class="hero-ctas">
+      <a href="#listen" class="btn-primary">Watch Latest Episode</a>
+      <a href="#confess" class="btn-secondary">Leave Your Confession</a>
+    </div>
+  </section>
+
+  <!-- HOSTS -->
+  <section id="hosts" style="padding: 80px 20px; position: relative; z-index: 1; background: linear-gradient(to bottom, var(--purple-deep), rgba(61,0,104,0.3), var(--purple-deep));">
+    <div class="container">
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;" class="reveal">
+        <span class="section-label">Your Hosts</span>
+        <h2 class="section-title">Buhzz Taylor & Luv Bug</h2>
+        <div class="divider" style="margin: 16px auto 40px;"></div>
+        <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 100%;">
+          <div style="position: absolute; width: 80%; height: 80%; background: radial-gradient(ellipse at center, rgba(255,45,143,0.4) 0%, rgba(123,0,204,0.25) 50%, transparent 75%); filter: blur(40px); z-index: 0; animation: glowPulse 3s ease-in-out infinite;"></div>
+          <img
+            src="host.png"
+            alt="Buhzz Taylor and Luv Bug"
+            loading="eager"
+            style="position: relative; z-index: 1; width: 90%; max-width: 480px; height: auto; display: block; object-fit: contain; filter: drop-shadow(0 0 25px rgba(255,45,143,0.8)) drop-shadow(0 0 50px rgba(123,0,204,0.5)); animation: float 6s ease-in-out infinite;"
+          />
+        </div>
+        <p style="max-width: 480px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-top: 40px; padding: 0 10px;">
+          Philadelphia's most unfiltered duo. Buhzz Taylor brings the nightlife knowledge and Luv Bug brings the real experience. Together they create the conversations nobody else is brave enough to have.
+        </p>
+        <div style="display: flex; gap: 16px; margin-top: 30px; flex-wrap: wrap; justify-content: center; padding: 0 20px;">
+          <a href="https://www.instagram.com/confessionsaftacurfew" target="_blank" class="btn-secondary" style="font-size:0.75rem; padding:12px 24px;">Follow On Instagram</a>
+          <a href="#listen" class="btn-primary" style="font-size:0.75rem; padding:12px 24px;">Watch The Show</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTEN -->
+  <section id="listen">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Now Playing</span>
+        <h2 class="section-title">Latest Episodes</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Real talk. No filter. No fake drama. Just raw conversations from people who actually lived it.</p>
+      </div>
+      <div class="listen-grid reveal">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div class="episode-card">
+            <div class="ep-number">Episode 01 — Pilot</div>
+            <h3 class="ep-title">Who We Are Afta Curfew</h3>
+            <p class="ep-desc">We introduce the show, break down nightlife culture, expose male entitlement and have the conversations most people are too scared to have in the daytime.</p>
+            <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="ep-link">Watch on YouTube →</a>
+          </div>
+          <div class="episode-card">
+            <div class="ep-number">Episode 02</div>
+            <h3 class="ep-title">Wildest Things Men Say In The Club</h3>
+            <p class="ep-desc">The most delusional, audacious and flat out disrespectful things men say to dancers — plus the first ever Cash or Crash game.</p>
+            <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="ep-link">Watch on YouTube →</a>
+          </div>
+        </div>
+        <div class="platform-links">
+          <p style="font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Listen & Watch On</p>
+          <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="platform-btn">
+            <span class="platform-icon">▶</span> YouTube
+          </a>
+          <a href="https://www.instagram.com/confessionsaftacurfew" target="_blank" class="platform-btn">
+            <span class="platform-icon">◈</span> Instagram
+          </a>
+          <a href="https://www.tiktok.com/@confessionsaftacurfew" target="_blank" class="platform-btn">
+            <span class="platform-icon">♪</span> TikTok
+          </a>
+          <a href="https://open.spotify.com" target="_blank" class="platform-btn">
+            <span class="platform-icon">●</span> Spotify
+          </a>
+          <a href="https://podcasts.apple.com" target="_blank" class="platform-btn">
+            <span class="platform-icon">◎</span> Apple Podcasts
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFESS -->
+  <section id="confess">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Your Turn</span>
+        <h2 class="section-title">Confess Afta Curfew</h2>
+        <div class="divider" style="margin-left: auto; margin-right: auto;"></div>
+        <p class="confess-instructions">Got a confession? Call our hotline and leave your voicemail. The best ones get played live on the show and we respond in real time. Keep it honest. Keep it grown.</p>
+        <span class="confess-phone glow">(215) 703-8490</span>
+        <p style="font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);">Available 24 Hours · Anonymous · No Judgment</p>
+        <p style="max-width: 620px; margin: 30px auto 10px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; text-align: center;">You got something nobody knows? A secret you have been sitting on? Something that happened in the club, in a relationship, in the streets or behind closed doors that you have never told a single soul?<br/><br/>This is your line. Call it. Leave your voicemail confession. We will never reveal who you are. Your voice can be kept anonymous. Your secret stays yours unless you want it heard.<br/><br/>The best confessions get played live on Confessions Afta Curfew and we respond to them in real time. No names. No judgment. Just the truth afta curfew.</p>
+        <div style="max-width: 620px; margin: 20px auto 40px; background: rgba(255,45,143,0.06); border: 1px solid rgba(255,45,143,0.2); padding: 24px 30px; text-align: left;">
+          <p style="font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--pink-hot); margin-bottom: 16px;">What Can You Confess?</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You saw something in the club you were never supposed to see</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You fell in love with someone in a nightlife space and never told them</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> A man or woman said something to you in the club that changed your life</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You spent money you did not have chasing something that was never real</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You held it down for someone and they never knew how much it cost you</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You heard something in the club you were never supposed to hear</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You caught feelings for someone whose lifestyle you could not handle</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> A dancer, bartender or bottle girl changed how you see the whole game</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You stayed loyal to someone in the streets or behind bars and it broke you</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You were in a situationship nobody around you knew about</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> Something happened after hours that you have never spoken about out loud</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You used someone for what they had and you still think about it</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You were the trick, the simp, the fraud or the one who got played and learned from it</li>
+            <li style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;"><span style="color: var(--pink-hot);">✦</span> You have a secret about the nightlife world that most people would never believe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASK -->
+  <section id="ask">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Need Advice?</span>
+        <h2 class="section-title">Ask Buhzz & Luv Bug</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Drop your situation right here. Relationships, nightlife, real life decisions — we answer the best ones live on the show.</p>
+      </div>
+      <div class="ask-grid reveal">
+        <form action="https://formspree.io/f/xbdwowlb" method="POST">
+          <div class="form-group">
+            <label class="form-label">Your Name or Alias</label>
+            <input type="text" class="form-input" placeholder="Stay anonymous if you want" name="name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Who Are You Asking?</label>
+            <select class="form-select" name="asking">
+              <option value="buhzz">Ask Buhzz</option>
+              <option value="luvbug">Ask Luv Bug</option>
+              <option value="both">Ask Both of Us</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Question or Situation</label>
+            <textarea class="form-textarea" placeholder="Give us all the details. The more real you are, the better we can help..." name="question"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Submit Your Question</button>
+        </form>
+        <div class="ask-host">
+          <p style="color: var(--text-muted); font-size:0.85rem; line-height:1.7;">We read every submission. The most real, most relatable, and most uncomfortable questions make it on the show. You can stay anonymous or give us your name. Either way the advice is coming unfiltered.</p>
+          <div class="host-card">
+            <div class="host-avatar">BT</div>
+            <div class="host-info">
+              <h3>Buhzz Taylor</h3>
+              <p>Host · Former Nightlife Manager · Filmmaker · Real One</p>
+            </div>
+          </div>
+          <div class="host-card">
+            <div class="host-avatar">LB</div>
+            <div class="host-info">
+              <h3>Luv Bug</h3>
+              <p>Co-Host · Resident Dancer · Luv Tells All · The Truth Teller</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK -->
+  <section id="book">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Work With Us</span>
+        <h2 class="section-title">Book Buhzz</h2>
+        <div class="divider" style="margin: 20px auto 40px;"></div>
+        <p class="section-desc" style="margin: 0 auto;">Appearances, speaking engagements, event hosting, podcast collaborations and production services through XLNZ Productions. Let us bring the CAC energy to your platform.</p>
+      </div>
+      <div class="book-grid reveal">
+        <div class="book-card">
+          <span class="book-icon">🎙️</span>
+          <h3>Podcast Guest</h3>
+          <p>Bring Buhzz or Luv Bug to your show for a real unfiltered conversation your audience will not forget.</p>
+        </div>
+        <div class="book-card">
+          <span class="book-icon">🎬</span>
+          <h3>Event Hosting</h3>
+          <p>Live events, panels, nightlife appearances and anything that needs CAC energy in the building.</p>
+        </div>
+        <div class="book-card">
+          <span class="book-icon">🎥</span>
+          <h3>XLNZ Productions</h3>
+          <p>Full production services for your next creative project. Film, podcast, content and more.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <a href="mailto:BookBuhzz@gmail.com" class="btn-primary" style="display:inline-block;">Send Booking Inquiry</a>
+        <p style="margin-top: 16px; font-size:0.75rem; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase;">BookBuhzz@gmail.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIBE -->
+  <section id="tribe">
+    <div class="container">
+      <div class="tribe-grid">
+        <div class="reveal">
+          <span class="section-label">Community</span>
+          <h2 class="section-title">Afta Curfew Tribe</h2>
+          <div class="divider"></div>
+          <p class="section-desc">This is not just a podcast. This is a movement. The Afta Curfew Tribe is where the real ones tap in.</p>
+          <ul class="tribe-benefits">
+            <li>Exclusive access to the Tribe Discord server</li>
+            <li>Early access to merch drops before anyone else</li>
+            <li>Early access to live show tickets</li>
+            <li>Behind the scenes content and bonus clips</li>
+            <li>Your confessions and questions heard first</li>
+            <li>Direct line to Buhzz and Luv Bug</li>
+          </ul>
+        </div>
+        <div class="tribe-ctas reveal">
+          <div class="tribe-card">
+            <h3>Join Patreon</h3>
+            <p>Support the show and unlock exclusive Tribe membership benefits starting at whatever you can give.</p>
+            <a href="https://www.patreon.com" target="_blank" class="btn-primary" style="display:inline-block; font-size:0.75rem; padding:14px 28px;">Tap In On Patreon</a>
+          </div>
+          <div class="tribe-card">
+            <h3>Join The Discord</h3>
+            <p>Get in the server. Connect with the Tribe. Talk to real ones who rock with CAC every episode.</p>
+            <a href="https://discord.com" target="_blank" class="btn-secondary" style="display:inline-block; font-size:0.75rem; padding:14px 28px;">Enter The Discord</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MERCH -->
+  <section id="merch">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Represent</span>
+        <h2 class="section-title">Curfew Collections</h2>
+        <div class="divider" style="margin: 20px auto 0;"></div>
+      </div>
+      <div class="merch-coming reveal">
+        <h3>Dropping Soon</h3>
+        <p>Official CAC merch is on the way. Tribe members get first access before it goes public. Join the Tribe now so you do not miss it.</p>
+        <a href="#tribe" class="btn-primary" style="display:inline-block;">Join The Tribe For Early Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:4px; color:var(--pink-hot);">CONFESSIONS AFTA CURFEW</span>
+        <p>Philadelphia's most unfiltered adult podcast. Real talk. No filter. No fake drama. Keep it honest. Keep it grown. And don't wait until after curfew to tell the truth.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#listen">Episodes</a></li>
+          <li><a href="#confess">Leave a Confession</a></li>
+          <li><a href="#ask">Ask Buhzz & Luv Bug</a></li>
+          <li><a href="#book">Book Buhzz</a></li>
+          <li><a href="#tribe">Afta Curfew Tribe</a></li>
+          <li><a href="#merch">Merch</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:BookBuhzz@gmail.com">BookBuhzz@gmail.com</a></li>
+          <li><a href="mailto:AskAftaCurfew@gmail.com">AskAftaCurfew@gmail.com</a></li>
+          <li><a href="mailto:Support@gmail.com">Support@gmail.com</a></li>
+        </ul>
+        <h4 style="margin-top:30px;">Follow</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/confessionsaftacurfew" target="_blank">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@confessionsaftacurfew" target="_blank">TikTok</a></li>
+          <li><a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Confessions Afta Curfew · BuhzzTaylor.com · XLNZ Productions · All Rights Reserved</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/confessionsaftacurfew" target="_blank" class="social-link">IG</a>
+        <a href="https://www.tiktok.com/@confessionsaftacurfew" target="_blank" class="social-link">TT</a>
+        <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="social-link">YT</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // SMOOTH NAV BACKGROUND
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 80) {
+        nav.style.background = 'rgba(26,0,48,0.98)';
+      } else {
+        nav.style.background = 'linear-gradient(to bottom, rgba(26,0,48,0.98), transparent)';
+      }
+    });
+  </script>
+</body>
+</html>
