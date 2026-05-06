@@ -890,6 +890,7 @@
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+      #latest > .container > .reveal { grid-template-columns: 1fr !important; gap: 30px !important; }
       section { padding: 70px 20px; }
       .listen-grid,
       .ask-grid,
@@ -918,6 +919,7 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
+      <li><a href="#latest">Latest</a></li>
       <li><a href="#listen">Episodes</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#confess">Confess</a></li>
@@ -932,6 +934,7 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">&times;</button>
+    <a href="#latest" onclick="document.getElementById('mobileMenu').classList.remove('open')">Latest</a>
     <a href="#listen" onclick="document.getElementById('mobileMenu').classList.remove('open')">Episodes</a>
     <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
     <a href="#confess" onclick="document.getElementById('mobileMenu').classList.remove('open')">Confess</a>
@@ -953,6 +956,158 @@
       <a href="#confess" class="btn-secondary">Leave Your Confession</a>
     </div>
   </section>
+
+
+  <!-- LATEST EPISODE + COUNTDOWN -->
+  <section id="latest" style="padding: 80px 40px 60px; position: relative; z-index: 1; background: linear-gradient(to bottom, var(--purple-deep), rgba(61,0,104,0.4));">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start;" class="reveal">
+
+        <!-- LATEST YOUTUBE EPISODE -->
+        <div>
+          <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Now Streaming</span>
+          <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:3px; margin-bottom:20px;">Latest Episode</h2>
+          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border: 2px solid rgba(255,45,143,0.3); box-shadow: 0 0 40px rgba(255,45,143,0.2);">
+            <iframe
+              style="position:absolute; top:0; left:0; width:100%; height:100%;"
+              src="https://www.youtube.com/embed?listType=user_uploads&list=confessionsaftacurfew&index=0"
+              title="Latest Confessions Afta Curfew Episode"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="btn-primary" style="display:inline-block; margin-top:20px; font-size:0.75rem; padding:12px 28px;">Watch All Episodes on YouTube</a>
+        </div>
+
+        <!-- COUNTDOWN + CALENDAR -->
+        <div>
+          <!-- COUNTDOWN -->
+          <div style="background: rgba(255,45,143,0.08); border: 1px solid rgba(255,45,143,0.3); padding: 30px; margin-bottom: 30px; text-align: center;">
+            <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Next Episode Drops In</span>
+            <div id="countdown" style="display:flex; justify-content:center; gap:20px; margin: 16px 0;">
+              <div style="text-align:center;">
+                <div id="cd-days" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--white); line-height:1;">00</div>
+                <div style="font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);">Days</div>
+              </div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--pink-hot); line-height:1;">:</div>
+              <div style="text-align:center;">
+                <div id="cd-hours" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--white); line-height:1;">00</div>
+                <div style="font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);">Hours</div>
+              </div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--pink-hot); line-height:1;">:</div>
+              <div style="text-align:center;">
+                <div id="cd-mins" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--white); line-height:1;">00</div>
+                <div style="font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);">Mins</div>
+              </div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--pink-hot); line-height:1;">:</div>
+              <div style="text-align:center;">
+                <div id="cd-secs" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--white); line-height:1;">00</div>
+                <div style="font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted);">Secs</div>
+              </div>
+            </div>
+            <p id="cd-label" style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;">Every other Wednesday at 3:33 PM</p>
+          </div>
+
+          <!-- EPISODE CALENDAR -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,45,143,0.15); padding: 24px;">
+            <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:16px;">Upcoming Episodes</span>
+            <div id="episode-calendar" style="display:flex; flex-direction:column; gap:12px;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // EPISODE SCHEDULE
+    // First episode: May 13, 2025 at 3:33 PM ET
+    // Drops every 14 days after that
+    const firstEp = new Date('2026-05-13T15:33:00-04:00'); // Episode 3
+    const interval = 14 * 24 * 60 * 60 * 1000; // 14 days in ms
+
+    function getEpisodeNumber(date) {
+      // Episode 3 drops May 13 2026
+      // Every 14 days after that is the next episode number
+      const ep3Date = new Date('2026-05-13T15:33:00-04:00');
+      const diff = date - ep3Date;
+      const epOffset = Math.round(diff / interval);
+      return 3 + epOffset;
+    }
+
+    function getNextEpisodeDates(count) {
+      const now = new Date();
+      const dates = [];
+      let ep = new Date(firstEp);
+      while (ep <= now) {
+        ep = new Date(ep.getTime() + interval);
+      }
+      for (let i = 0; i < count; i++) {
+        dates.push(new Date(ep.getTime() + interval * i));
+      }
+      return dates;
+    }
+
+    function getNextEpisode() {
+      const now = new Date();
+      let ep = new Date(firstEp);
+      while (ep <= now) {
+        ep = new Date(ep.getTime() + interval);
+      }
+      return ep;
+    }
+
+    function formatDate(d) {
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ' @ 3:33 PM';
+    }
+
+    // BUILD CALENDAR
+    function buildCalendar() {
+      const cal = document.getElementById('episode-calendar');
+      if (!cal) return;
+      const dates = getNextEpisodeDates(4);
+      cal.innerHTML = '';
+      dates.forEach(function(d, i) {
+        const div = document.createElement('div');
+        div.style.cssText = 'display:flex; align-items:center; gap:16px; padding:12px; background:rgba(255,255,255,0.03); border-left:3px solid ' + (i === 0 ? '#ff2d8f' : 'rgba(255,45,143,0.3)') + ';';
+        div.innerHTML = '<div style="font-family:Bebas Neue,sans-serif; font-size:1.5rem; color:' + (i === 0 ? '#ff2d8f' : '#b899d4') + '; min-width:36px; text-align:center;">EP</div><div><div style="font-size:0.85rem; color:#ffffff; font-weight:500;">' + formatDate(d) + '</div><div style="font-size:0.7rem; color:#b899d4; letter-spacing:2px; text-transform:uppercase; margin-top:2px;">' + (i === 0 ? 'Next Episode' : 'Coming Soon') + '</div></div>';
+        cal.appendChild(div);
+      });
+    }
+
+    // COUNTDOWN TIMER
+    function updateCountdown() {
+      const next = getNextEpisode();
+      const now = new Date();
+      const diff = next - now;
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        document.getElementById('cd-label').textContent = 'New episode is LIVE now!';
+        buildCalendar();
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+      const label = formatDate(next);
+      document.getElementById('cd-label').textContent = 'Next drop: ' + label + ' ET';
+    }
+
+    buildCalendar();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 
   <!-- HOSTS -->
   <section id="hosts" style="padding: 80px 20px; position: relative; z-index: 1; background: linear-gradient(to bottom, var(--purple-deep), rgba(61,0,104,0.3), var(--purple-deep));">
@@ -1252,7 +1407,8 @@
       <div class="footer-col">
         <h4>Navigate</h4>
         <ul>
-          <li><a href="#listen">Episodes</a></li>
+          <li><a href="#latest">Latest</a></li>
+      <li><a href="#listen">Episodes</a></li>
       <li><a href="#about">About</a></li>
           <li><a href="#confess">Leave a Confession</a></li>
           <li><a href="#ask">Ask Buhzz & Luv Bug</a></li>
