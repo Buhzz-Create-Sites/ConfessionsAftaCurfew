@@ -1024,16 +1024,21 @@
     // EPISODE SCHEDULE
     // First episode: May 13, 2025 at 3:33 PM ET
     // Drops every 14 days after that
-    const firstEp = new Date('2026-05-13T15:33:00-04:00'); // Episode 3
+    const firstEp = new Date('2026-05-13T15:33:00-04:00'); // Episode 3 drops here
     const interval = 14 * 24 * 60 * 60 * 1000; // 14 days in ms
 
-    function getEpisodeNumber(date) {
+    function getEpisodeNumber(index) {
       // Episode 3 drops May 13 2026
-      // Every 14 days after that is the next episode number
+      // index 0 = next episode, index 1 = episode after that etc
+      const now = new Date();
       const ep3Date = new Date('2026-05-13T15:33:00-04:00');
-      const diff = date - ep3Date;
-      const epOffset = Math.round(diff / interval);
-      return 3 + epOffset;
+      let ep = new Date(firstEp);
+      let epNum = 3;
+      while (ep <= now) {
+        ep = new Date(ep.getTime() + interval);
+        epNum++;
+      }
+      return epNum + index;
     }
 
     function getNextEpisodeDates(count) {
