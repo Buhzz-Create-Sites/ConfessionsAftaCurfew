@@ -27,6 +27,7 @@
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
+      padding-top: 40px;
     }
 
     /* NOISE TEXTURE OVERLAY */
@@ -891,6 +892,7 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       #latest > .container > .reveal { grid-template-columns: 1fr !important; gap: 30px !important; }
+      #buhzz .reveal > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
       section { padding: 70px 20px; }
       .listen-grid,
       .ask-grid,
@@ -911,6 +913,54 @@
   </style>
 </head>
 <body>
+  <!-- MEET THE SICKOS ANNOUNCEMENT BAR -->
+  <div id="sickos-bar" style="
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 2000;
+    background: linear-gradient(135deg, #FF2D8F, #7B00CC);
+    padding: 10px 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  ">
+    <span style="font-family:'Bebas Neue',sans-serif; font-size:0.9rem; letter-spacing:3px; color:white;">
+      🎬 NOW SHOWING JUNE 12TH — MEET THE SICKOS — PHILADELPHIA'S FIRST HOMEGROWN HORROR SLASHER FILM
+    </span>
+    <a href="https://www.tickettailor.com/events/noegosworldmediallc/2163877" target="_blank" style="
+      background: white;
+      color: #FF2D8F;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:0.8rem;
+      letter-spacing:2px;
+      padding: 6px 18px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    ">GET TICKETS NOW</a>
+    <button onclick="document.getElementById('sickos-bar').style.display='none'; document.body.style.paddingTop='60px';" style="
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    ">&times;</button>
+  </div>
+
+
+
+  <!-- MEET THE SICKOS ANNOUNCEMENT BAR -->
+  <div id="announcement-bar" style="background: linear-gradient(135deg, var(--pink-hot), #cc0070); padding: 12px 20px; text-align: center; position: relative; z-index: 1001;">
+    <p style="margin: 0; font-size: 0.85rem; font-weight: 500; color: white; letter-spacing: 1px;">
+      🎬 <strong>NOW SHOWING JUNE 12TH</strong> — Buhzz Taylor stars in <strong>Meet The Sickos</strong> — Philadelphia's first homegrown horror slasher film
+      <a href="https://www.tickettailor.com/events/noegosworldmediallc/2163877" target="_blank" style="color: white; font-weight: 700; margin-left: 12px; padding: 4px 14px; border: 2px solid white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">GET TICKETS →</a>
+    </p>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -927,9 +977,103 @@
       <li><a href="#book">Book</a></li>
       <li><a href="#tribe">Tribe</a></li>
       <li><a href="#merch">Merch</a></li>
+      <li><a href="#buhzz">Buhzz</a></li>
     </ul>
   </nav>
 
+
+
+  <!-- TRIBE SIGNUP POPUP -->
+  <div id="tribe-popup" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26,0,48,0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  ">
+    <div style="
+      background: linear-gradient(135deg, rgba(61,0,104,0.95), rgba(26,0,48,0.98));
+      border: 1px solid rgba(255,45,143,0.4);
+      max-width: 500px;
+      width: 100%;
+      padding: 50px 40px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(255,45,143,0.2);
+    ">
+      <button onclick="closePopup()" style="
+        position: absolute;
+        top: 16px; right: 20px;
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.5);
+        font-size: 1.5rem;
+        cursor: pointer;
+      ">&times;</button>
+
+      <div style="font-size:2rem; margin-bottom:12px;">🎙️</div>
+      <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:#FF2D8F; display:block; margin-bottom:12px;">Join The Movement</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:3px; margin-bottom:12px; line-height:1;">Join The Afta Curfew Tribe</h2>
+      <p style="color:#b899d4; font-size:0.9rem; line-height:1.7; margin-bottom:30px;">Be the first to know about new episodes, merch drops, live show tickets and exclusive Tribe content. The real ones get in early.</p>
+
+      <form onsubmit="handleSignup(event)" style="display:flex; flex-direction:column; gap:14px;">
+        <input
+          type="email"
+          id="popup-email"
+          placeholder="Your email address"
+          required
+          style="
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            padding: 14px 18px;
+            font-family:'DM Sans',sans-serif;
+            font-size:0.9rem;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+          "
+        />
+        <div style="position:relative;">
+          <input
+            type="tel"
+            id="popup-phone"
+            placeholder="Phone number for text alerts (optional)"
+            style="
+              background: rgba(255,255,255,0.06);
+              border: 1px solid rgba(255,255,255,0.15);
+              color: white;
+              padding: 14px 18px;
+              font-family:'DM Sans',sans-serif;
+              font-size:0.9rem;
+              outline: none;
+              width: 100%;
+              box-sizing: border-box;
+            "
+          />
+        </div>
+        <p style="font-size:0.72rem; color:#b899d4; margin-top:-6px; text-align:left;">📱 Add your number and get text alerts when new episodes drop plus early access to live show tickets before anyone else.</p>
+        <button type="submit" style="
+          background: linear-gradient(135deg, #FF2D8F, #cc0070);
+          color: white;
+          padding: 16px;
+          border: none;
+          font-family:'DM Sans',sans-serif;
+          font-weight:500;
+          font-size:0.8rem;
+          letter-spacing:2px;
+          text-transform:uppercase;
+          cursor:pointer;
+          width:100%;
+          margin-top:6px;
+        ">Count Me In — I'm Tribe</button>
+      </form>
+      <p style="font-size:0.7rem; color:rgba(184,153,212,0.5); margin-top:16px;">No spam. Ever. Just real Tribe business.</p>
+    </div>
+  </div>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -942,6 +1086,8 @@
     <a href="#book" onclick="document.getElementById('mobileMenu').classList.remove('open')">Book</a>
     <a href="#tribe" onclick="document.getElementById('mobileMenu').classList.remove('open')">Tribe</a>
     <a href="#merch" onclick="document.getElementById('mobileMenu').classList.remove('open')">Merch</a>
+    <a href="#actor" onclick="document.getElementById('mobileMenu').classList.remove('open')">Actor</a>
+    <a href="#buhzz" onclick="document.getElementById('mobileMenu').classList.remove('open')">Buhzz</a>
   </div>
 
   <!-- HERO -->
@@ -1402,6 +1548,95 @@
     </div>
   </section>
 
+
+  <!-- BUHZZ TAYLOR — ACTOR & COMEDIAN -->
+  <section id="buhzz" style="padding: 100px 40px; position: relative; z-index: 1; background: linear-gradient(135deg, rgba(26,0,48,0.95), rgba(61,0,104,0.4));">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: 60px;">
+        <span class="section-label">Beyond The Mic</span>
+        <h2 class="section-title">Buhzz Taylor</h2>
+        <div class="divider" style="margin: 16px auto 30px;"></div>
+        <p style="max-width: 640px; margin: 0 auto; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">Before the podcast. Before the nightlife. Buhzz Taylor is an actor and stand up comedian who has been building a career in front of the camera for years. If you did not know that before you do now.</p>
+      </div>
+
+      <!-- MEET THE SICKOS FEATURE -->
+      <div style="background: rgba(255,45,143,0.08); border: 1px solid rgba(255,45,143,0.4); padding: 40px; margin-bottom: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;" class="reveal">
+        <div>
+          <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Now Showing — June 12th</span>
+          <h3 style="font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:4px; margin-bottom:16px; line-height:1;">Meet The Sickos</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.8; margin-bottom:24px;">Philadelphia's first homegrown horror slasher film. Buhzz Taylor stars in what is set to be a landmark moment for independent Philly filmmaking. Screening June 12th at Cinemark on 40th Street in West Philadelphia.</p>
+          <a href="https://www.tickettailor.com/events/noegosworldmediallc/2163877" target="_blank" class="btn-primary" style="display:inline-block; animation: glowPulse 2s ease-in-out infinite;">GET YOUR TICKETS NOW</a>
+        </div>
+        <div style="text-align:center;">
+          <div style="background: rgba(255,45,143,0.1); border: 2px solid rgba(255,45,143,0.4); padding: 60px 40px; position: relative;">
+            <div style="font-family:'Bebas Neue',sans-serif; font-size:5rem; color:var(--pink-hot); line-height:1; margin-bottom:8px;">JUNE</div>
+            <div style="font-family:'Bebas Neue',sans-serif; font-size:8rem; color:var(--white); line-height:1; margin-bottom:8px;">12</div>
+            <div style="font-size:0.75rem; letter-spacing:4px; text-transform:uppercase; color:var(--text-muted);">Cinemark — West Philadelphia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMDB + COMEDIAN -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;" class="reveal">
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,45,143,0.2); padding: 36px;">
+          <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Official Filmography</span>
+          <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:3px; margin-bottom:16px;">Find Buhzz on IMDB</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7; margin-bottom:24px;">Every project. Every credit. Every role. Buhzz Taylor's full acting portfolio is on IMDB. Go see what he has been building behind the scenes while he was building CAC in front of the camera.</p>
+          <a href="https://www.imdb.com/name/nm16094195/" target="_blank" class="btn-secondary" style="display:inline-block; font-size:0.75rem; padding:12px 28px;">View IMDB Profile</a>
+        </div>
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,45,143,0.2); padding: 36px;">
+          <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Stand Up Comedy</span>
+          <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:3px; margin-bottom:16px;">The Rush — On Tubi</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7; margin-bottom:24px;">Did not know Buhzz was a comedian? Now you do. Watch his latest comedy film The Rush streaming now for free on Tubi. Your host has range. Go find out for yourself.</p>
+          <a href="https://tubitv.com" target="_blank" class="btn-secondary" style="display:inline-block; font-size:0.75rem; padding:12px 28px;">Watch Free on Tubi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ACTOR SECTION -->
+  <section id="actor" style="padding: 100px 40px; position: relative; z-index: 1; background: linear-gradient(135deg, rgba(26,0,48,0.95), rgba(61,0,104,0.4));">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom:60px;">
+        <span class="section-label">Buhzz Taylor</span>
+        <h2 class="section-title">Actor & Comedian</h2>
+        <div class="divider" style="margin: 16px auto 30px;"></div>
+        <p style="max-width:600px; margin:0 auto; color:var(--text-muted); font-size:0.95rem; line-height:1.8;">Before Confessions Afta Curfew. Before the nightlife. Buhzz Taylor has been building a career in front of the camera as an actor and stand up comedian. Philadelphia raised. Unapologetically himself on stage and on screen.</p>
+      </div>
+
+      <!-- MEET THE SICKOS FEATURE -->
+      <div class="reveal" style="background: rgba(255,45,143,0.06); border: 1px solid rgba(255,45,143,0.3); padding: 50px 40px; margin-bottom: 60px; text-align:center; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(ellipse at 50% 0%, rgba(255,45,143,0.1), transparent 70%); pointer-events:none;"></div>
+        <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:#FF2D8F; display:block; margin-bottom:12px; position:relative;">Now Showing</span>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,5rem); letter-spacing:4px; line-height:1; margin-bottom:16px; background:linear-gradient(135deg,white,#FF2D8F); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative;">Meet The Sickos</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:8px; position:relative;">Philadelphia's First Homegrown Horror Slasher Film</p>
+        <p style="color:#FF2D8F; font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:3px; margin-bottom:30px; position:relative;">June 12th — Cinemark 40th Street — West Philadelphia</p>
+        <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative;">
+          <a href="https://www.tickettailor.com/events/noegosworldmediallc/2163877" target="_blank" class="btn-primary" style="display:inline-block; font-size:0.8rem; padding:16px 36px; animation: glowPulse 3s ease-in-out infinite;">🎟️ Get Your Tickets Now</a>
+          <a href="https://www.imdb.com/name/nm16094195/" target="_blank" class="btn-secondary" style="display:inline-block; font-size:0.8rem; padding:16px 36px;">View on IMDB</a>
+        </div>
+      </div>
+
+      <!-- IMDB + ABOUT -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;" class="reveal">
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,45,143,0.15); padding:36px;">
+          <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:#FF2D8F; display:block; margin-bottom:16px;">On Screen</span>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;">Filmography</h3>
+          <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.7; margin-bottom:24px;">From independent films to his latest horror slasher debut Buhzz Taylor brings the same raw authenticity to the screen that he brings to the podcast. Real. Unfiltered. Unforgettable.</p>
+          <a href="https://www.imdb.com/name/nm16094195/" target="_blank" class="btn-secondary" style="display:inline-block; font-size:0.75rem; padding:12px 24px;">View Full IMDB Profile</a>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,45,143,0.15); padding:36px;">
+          <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:#FF2D8F; display:block; margin-bottom:16px;">On Stage</span>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;">Stand Up Comedy</h3>
+          <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.7; margin-bottom:24px;">Buhzz Taylor's stand up comedy draws from real life. Nightlife. Relationships. The streets of Philadelphia. The kind of truth that makes people laugh because they recognize themselves in every punchline.</p>
+          <a href="mailto:BookBuhzz@gmail.com" class="btn-secondary" style="display:inline-block; font-size:0.75rem; padding:12px 24px;">Book Buhzz for Shows</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
@@ -1420,6 +1655,7 @@
           <li><a href="#book">Book Buhzz</a></li>
           <li><a href="#tribe">Afta Curfew Tribe</a></li>
           <li><a href="#merch">Merch</a></li>
+          <li><a href="#buhzz">Buhzz Taylor</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1448,6 +1684,40 @@
   </footer>
 
   <script>
+
+    // TRIBE POPUP
+    function closePopup() {
+      document.getElementById('tribe-popup').style.display = 'none';
+      localStorage.setItem('cac-popup-seen', 'true');
+    }
+
+    function handleSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('popup-email').value;
+      const phone = document.getElementById('popup-phone').value;
+      // Send to AskAftaCurfew email via formspree
+      fetch('https://formspree.io/f/xbdwowlb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'Tribe Signup',
+          email: email,
+          phone: phone || 'Not provided'
+        })
+      }).then(() => {
+        document.getElementById('tribe-popup').innerHTML = '<div style="text-align:center; padding:60px 40px; color:white;"><div style=\'font-size:3rem; margin-bottom:20px;\'>🎙️</div><h2 style=\'font-family:Bebas Neue,sans-serif; font-size:2rem; letter-spacing:3px; color:#FF2D8F; margin-bottom:12px;\'>Welcome To The Tribe</h2><p style=\'color:#b899d4;\'>You are locked in. Stay tuned for new episodes, drops and everything afta curfew.</p><button onclick=\'closePopup()\' style=\'margin-top:30px; background:linear-gradient(135deg,#FF2D8F,#cc0070); color:white; border:none; padding:14px 36px; font-family:DM Sans,sans-serif; letter-spacing:2px; text-transform:uppercase; cursor:pointer; font-size:0.8rem;\'>Let\'s Go</button></div>';
+      }).catch(() => {
+        closePopup();
+      });
+    }
+
+    // Show popup after 8 seconds if not seen before
+    setTimeout(function() {
+      if (!localStorage.getItem('cac-popup-seen')) {
+        document.getElementById('tribe-popup').style.display = 'flex';
+      }
+    }, 8000);
+
     // SCROLL REVEAL
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -1469,5 +1739,66 @@
       }
     });
   </script>
+
+  <!-- TRIBE SIGNUP POPUP -->
+  <div id="tribe-popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(26,0,48,0.95); z-index:99999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background: linear-gradient(135deg, rgba(61,0,104,0.98), rgba(26,0,48,0.98)); border: 1px solid rgba(255,45,143,0.4); max-width:500px; width:100%; padding:50px 40px; position:relative; text-align:center;">
+      <button onclick="closeTribePopup()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:var(--text-muted); font-size:1.5rem; cursor:pointer;">&times;</button>
+      <img src="logo.png" alt="CAC" style="width:80px; height:80px; object-fit:contain; margin-bottom:20px;" onerror="this.style.display='none'"/>
+      <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Join The Movement</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:3px; margin-bottom:12px;">Join The Afta Curfew Tribe</h2>
+      <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7; margin-bottom:30px;">Be the first to know about new episodes, merch drops and live show tickets. The Tribe always gets access before anyone else.</p>
+
+      <form onsubmit="handleTribeSignup(event)" style="display:flex; flex-direction:column; gap:14px;">
+        <input type="email" id="tribe-email" placeholder="Your email address" required style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); color:white; padding:14px 18px; font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none; width:100%; box-sizing:border-box;"/>
+        <div style="position:relative;">
+          <input type="tel" id="tribe-phone" placeholder="Phone number (optional — get text alerts)" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); color:white; padding:14px 18px; font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none; width:100%; box-sizing:border-box;"/>
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:0.65rem; color:var(--pink-hot); letter-spacing:2px; text-transform:uppercase;">Optional</span>
+        </div>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin:0;">Add your phone number and get early access to live show tickets before they go public to anyone else.</p>
+        <button type="submit" style="background:linear-gradient(135deg,var(--pink-hot),#cc0070); color:white; padding:16px; border:none; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; margin-top:6px;">Join The Tribe</button>
+      </form>
+      <button onclick="closeTribePopup()" style="background:none; border:none; color:var(--text-muted); font-size:0.75rem; cursor:pointer; margin-top:16px; text-decoration:underline;">No thanks, I'll miss out</button>
+    </div>
+  </div>
+
+  <script>
+    // TRIBE POPUP
+    function showTribePopup() {
+      const popup = document.getElementById('tribe-popup');
+      if (popup && !localStorage.getItem('tribe-signed-up') && !sessionStorage.getItem('popup-shown')) {
+        popup.style.display = 'flex';
+        sessionStorage.setItem('popup-shown', 'true');
+      }
+    }
+
+    function closeTribePopup() {
+      document.getElementById('tribe-popup').style.display = 'none';
+    }
+
+    function handleTribeSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('tribe-email').value;
+      const phone = document.getElementById('tribe-phone').value;
+      // Send to your email via Formspree
+      fetch('https://formspree.io/f/xbdwowlb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: email, 
+          phone: phone || 'Not provided',
+          type: 'Tribe Signup'
+        })
+      }).then(() => {
+        document.getElementById('tribe-popup').innerHTML = '<div style="text-align:center; padding:60px 40px;"><h2 style="font-family:Bebas Neue,sans-serif; font-size:2.5rem; color:white; letter-spacing:3px; margin-bottom:16px;">Welcome To The Tribe</h2><p style="color:#b899d4; font-size:0.95rem; line-height:1.7;">You are locked in. We will hit you first when something drops. Keep it honest. Keep it grown.</p><button onclick="closeTribePopup()" style="margin-top:24px; background:linear-gradient(135deg,#ff2d8f,#cc0070); color:white; padding:14px 32px; border:none; font-family:DM Sans,sans-serif; font-weight:500; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">Let's Go</button></div>';
+      }).catch(() => {
+        alert('Something went wrong. Please try again.');
+      });
+    }
+
+    // Show popup after 8 seconds
+    setTimeout(showTribePopup, 8000);
+  </script>
+
 </body>
 </html>
