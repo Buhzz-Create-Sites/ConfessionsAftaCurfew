@@ -1123,7 +1123,7 @@
               allowfullscreen>
             </iframe>
           </div>
-          <a href="vnd.youtube://www.youtube.com/@confessionsaftacurfew" onclick="window.location='https://www.youtube.com/@confessionsaftacurfew'" target="_blank" class="btn-primary" style="display:inline-block; margin-top:20px; font-size:0.75rem; padding:12px 28px;">Watch All Episodes on YouTube</a>
+          <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="btn-primary" style="display:inline-block; margin-top:20px; font-size:0.75rem; padding:12px 28px;">Watch All Episodes on YouTube</a>
         </div>
 
         <!-- COUNTDOWN + CALENDAR -->
@@ -1347,7 +1347,7 @@
         </div>
         <div class="platform-links">
           <p style="font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Listen & Watch On</p>
-          <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="platform-btn" onclick="if(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){event.preventDefault();window.location='vnd.youtube://www.youtube.com/@confessionsaftacurfew'||'https://www.youtube.com/@confessionsaftacurfew';}">
+          <a href="https://www.youtube.com/@confessionsaftacurfew" target="_blank" class="platform-btn">
             <span class="platform-icon">▶</span> YouTube
           </a>
           <a href="https://www.instagram.com/confessionsaftacurfew" target="_blank" class="platform-btn">
@@ -1704,19 +1704,12 @@
           email: email,
           phone: phone || 'Not provided'
         })
-      }).then(() => {
-        document.getElementById('tribe-popup').innerHTML = '<div style="text-align:center; padding:60px 40px; color:white;"><div style=\'font-size:3rem; margin-bottom:20px;\'>🎙️</div><h2 style=\'font-family:Bebas Neue,sans-serif; font-size:2rem; letter-spacing:3px; color:#FF2D8F; margin-bottom:12px;\'>Welcome To The Tribe</h2><p style=\'color:#b899d4;\'>You are locked in. Stay tuned for new episodes, drops and everything afta curfew.</p><button onclick=\'closePopup()\' style=\'margin-top:30px; background:linear-gradient(135deg,#FF2D8F,#cc0070); color:white; border:none; padding:14px 36px; font-family:DM Sans,sans-serif; letter-spacing:2px; text-transform:uppercase; cursor:pointer; font-size:0.8rem;\'>Let\'s Go</button></div>';
-      }).catch(() => {
-        closePopup();
+      }).then(function() {
+        closeTribePopup();
+      }).catch(function() {
+        closeTribePopup();
       });
     }
-
-    // Show popup after 8 seconds if not seen before
-    setTimeout(function() {
-      if (!localStorage.getItem('cac-popup-seen')) {
-        document.getElementById('tribe-popup').style.display = 'flex';
-      }
-    }, 8000);
 
     // SCROLL REVEAL
     const reveals = document.querySelectorAll('.reveal');
@@ -1789,9 +1782,27 @@
           phone: phone || 'Not provided',
           type: 'Tribe Signup'
         })
-      }).then(() => {
-        document.getElementById('tribe-popup').innerHTML = '<div style="text-align:center; padding:60px 40px;"><h2 style="font-family:Bebas Neue,sans-serif; font-size:2.5rem; color:white; letter-spacing:3px; margin-bottom:16px;">Welcome To The Tribe</h2><p style="color:#b899d4; font-size:0.95rem; line-height:1.7;">You are locked in. We will hit you first when something drops. Keep it honest. Keep it grown.</p><button onclick="closeTribePopup()" style="margin-top:24px; background:linear-gradient(135deg,#ff2d8f,#cc0070); color:white; padding:14px 32px; border:none; font-family:DM Sans,sans-serif; font-weight:500; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">Let's Go</button></div>';
-      }).catch(() => {
+      }).then(function() {
+        var popup = document.getElementById('tribe-popup');
+        popup.innerHTML = '';
+        var wrapper = document.createElement('div');
+        wrapper.style.cssText = 'text-align:center; padding:60px 40px;';
+        var title = document.createElement('h2');
+        title.style.cssText = 'font-family:Bebas Neue,sans-serif; font-size:2.5rem; color:white; letter-spacing:3px; margin-bottom:16px;';
+        title.textContent = 'Welcome To The Tribe';
+        var msg = document.createElement('p');
+        msg.style.cssText = 'color:#b899d4; font-size:0.95rem; line-height:1.7;';
+        msg.textContent = 'You are locked in. We will hit you first when something drops. Keep it honest. Keep it grown.';
+        var btn = document.createElement('button');
+        btn.style.cssText = 'margin-top:24px; background:linear-gradient(135deg,#ff2d8f,#cc0070); color:white; padding:14px 32px; border:none; font-family:DM Sans,sans-serif; font-weight:500; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer;';
+        btn.textContent = 'Lets Go';
+        btn.onclick = closeTribePopup;
+        wrapper.appendChild(title);
+        wrapper.appendChild(msg);
+        wrapper.appendChild(btn);
+        popup.appendChild(wrapper);
+        localStorage.setItem('tribe-signed-up', 'true');
+      }).catch(function() {
         alert('Something went wrong. Please try again.');
       });
     }
