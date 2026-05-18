@@ -1744,6 +1744,14 @@
 
     function closeTribePopup() {
       document.getElementById('tribe-popup').style.display = 'none';
+      if (!localStorage.getItem('tribe-signed-up')) {
+        document.getElementById('tribe-sticky-tab').style.display = 'flex';
+      }
+    }
+
+    function openTribePopup() {
+      document.getElementById('tribe-popup').style.display = 'flex';
+      document.getElementById('tribe-sticky-tab').style.display = 'none';
     }
 
     function handleTribeSignup(e) {
@@ -1779,6 +1787,7 @@
         wrapper.appendChild(btn);
         popup.appendChild(wrapper);
         localStorage.setItem('tribe-signed-up', 'true');
+        document.getElementById('tribe-sticky-tab').style.display = 'none';
       }).catch(function() {
         alert('Something went wrong. Please try again.');
       });
@@ -1794,6 +1803,12 @@
   <script type="text/javascript">
   !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();
   </script>
+
+  <!-- TRIBE STICKY TAB -->
+  <div id="tribe-sticky-tab" onclick="openTribePopup()" style="display:none; position:fixed; bottom:40px; right:0; z-index:9998; cursor:pointer; align-items:center; gap:10px; background:linear-gradient(135deg,#ff2d8f,#cc0070); padding:14px 20px 14px 18px; box-shadow:-4px 4px 20px rgba(255,45,143,0.5); border-radius:4px 0 0 4px; transition:transform 0.3s;" onmouseover="this.style.transform='translateX(-4px)'" onmouseout="this.style.transform='translateX(0)'">
+    <span style="font-size:1rem;">✦</span>
+    <span style="font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:white; white-space:nowrap;">Join The Tribe</span>
+  </div>
 
 </body>
 </html>
