@@ -946,7 +946,97 @@
 
 
 
-  
+  <!-- TRIBE SIGNUP POPUP -->
+  <div id="tribe-popup" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26,0,48,0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  ">
+    <div style="
+      background: linear-gradient(135deg, rgba(61,0,104,0.95), rgba(26,0,48,0.98));
+      border: 1px solid rgba(255,45,143,0.4);
+      max-width: 500px;
+      width: 100%;
+      padding: 50px 40px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(255,45,143,0.2);
+    ">
+      <button onclick="closePopup()" style="
+        position: absolute;
+        top: 16px; right: 20px;
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.5);
+        font-size: 1.5rem;
+        cursor: pointer;
+      ">&times;</button>
+
+      <div style="font-size:2rem; margin-bottom:12px;">🎙️</div>
+      <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:#FF2D8F; display:block; margin-bottom:12px;">Join The Movement</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:3px; margin-bottom:12px; line-height:1;">Join The Afta Curfew Tribe</h2>
+      <p style="color:#b899d4; font-size:0.9rem; line-height:1.7; margin-bottom:30px;">Be the first to know about new episodes, merch drops, live show tickets and exclusive Tribe content. The real ones get in early.</p>
+
+      <form onsubmit="handleSignup(event)" style="display:flex; flex-direction:column; gap:14px;">
+        <input
+          type="email"
+          id="popup-email"
+          placeholder="Your email address"
+          required
+          style="
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            padding: 14px 18px;
+            font-family:'DM Sans',sans-serif;
+            font-size:0.9rem;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+          "
+        />
+        <div style="position:relative;">
+          <input
+            type="tel"
+            id="popup-phone"
+            placeholder="Phone number for text alerts (optional)"
+            style="
+              background: rgba(255,255,255,0.06);
+              border: 1px solid rgba(255,255,255,0.15);
+              color: white;
+              padding: 14px 18px;
+              font-family:'DM Sans',sans-serif;
+              font-size:0.9rem;
+              outline: none;
+              width: 100%;
+              box-sizing: border-box;
+            "
+          />
+        </div>
+        <p style="font-size:0.72rem; color:#b899d4; margin-top:-6px; text-align:left;">📱 Add your number and get text alerts when new episodes drop plus early access to live show tickets before anyone else.</p>
+        <button type="submit" style="
+          background: linear-gradient(135deg, #FF2D8F, #cc0070);
+          color: white;
+          padding: 16px;
+          border: none;
+          font-family:'DM Sans',sans-serif;
+          font-weight:500;
+          font-size:0.8rem;
+          letter-spacing:2px;
+          text-transform:uppercase;
+          cursor:pointer;
+          width:100%;
+          margin-top:6px;
+        ">Count Me In — I'm Tribe</button>
+      </form>
+      <p style="font-size:0.7rem; color:rgba(184,153,212,0.5); margin-top:16px;">No spam. Ever. Just real Tribe business.</p>
+    </div>
+  </div>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -1402,15 +1492,17 @@
           </ul>
         </div>
         <div class="tribe-ctas reveal">
-          <div class="tribe-card">
+          <div class="tribe-card" style="position:relative; overflow:hidden;">
+            <div style="position:absolute; top:14px; right:14px; background:linear-gradient(135deg,var(--pink-hot),#cc0070); padding:4px 12px; font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; font-family:'DM Sans',sans-serif; font-weight:500;">Coming Soon</div>
             <h3>Join Patreon</h3>
-            <p>Support the show and unlock exclusive Tribe membership benefits starting at whatever you can give.</p>
-            <a href="https://www.patreon.com" target="_blank" class="btn-primary" style="display:inline-block; font-size:0.75rem; padding:14px 28px;">Tap In On Patreon</a>
+            <p>Tribe members get access first. Sign up for the Afta Curfew Tribe list below and you will be the first to know the moment Patreon goes live.</p>
+            <span style="display:inline-block; font-size:0.75rem; padding:14px 28px; border:1px solid rgba(255,45,143,0.3); color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; font-family:'DM Sans',sans-serif;">Tribe Gets First Access</span>
           </div>
-          <div class="tribe-card">
+          <div class="tribe-card" style="position:relative; overflow:hidden;">
+            <div style="position:absolute; top:14px; right:14px; background:linear-gradient(135deg,var(--purple-bright),var(--purple-mid)); padding:4px 12px; font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; font-family:'DM Sans',sans-serif; font-weight:500;">Coming Soon</div>
             <h3>Join The Discord</h3>
-            <p>Get in the server. Connect with the Tribe. Talk to real ones who rock with CAC every episode.</p>
-            <a href="https://discord.com" target="_blank" class="btn-secondary" style="display:inline-block; font-size:0.75rem; padding:14px 28px;">Enter The Discord</a>
+            <p>The server is being built for real ones only. Tribe members get the invite link before anyone else. Sign up below and we will hit you first.</p>
+            <span style="display:inline-block; font-size:0.75rem; padding:14px 28px; border:1px solid rgba(255,255,255,0.15); color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; font-family:'DM Sans',sans-serif;">Tribe Gets First Access</span>
           </div>
         </div>
       </div>
@@ -1570,7 +1662,33 @@
 
   <script>
 
-        // SCROLL REVEAL
+    // TRIBE POPUP
+    function closePopup() {
+      document.getElementById('tribe-popup').style.display = 'none';
+      localStorage.setItem('cac-popup-seen', 'true');
+    }
+
+    function handleSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('popup-email').value;
+      const phone = document.getElementById('popup-phone').value;
+      // Send to AskAftaCurfew email via formspree
+      fetch('https://formspree.io/f/xbdwowlb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'Tribe Signup',
+          email: email,
+          phone: phone || 'Not provided'
+        })
+      }).then(function() {
+        closeTribePopup();
+      }).catch(function() {
+        closeTribePopup();
+      });
+    }
+
+    // SCROLL REVEAL
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1592,9 +1710,83 @@
     });
   </script>
 
-  
+  <!-- TRIBE SIGNUP POPUP -->
+  <div id="tribe-popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(26,0,48,0.95); z-index:99999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background: linear-gradient(135deg, rgba(61,0,104,0.98), rgba(26,0,48,0.98)); border: 1px solid rgba(255,45,143,0.4); max-width:500px; width:100%; padding:50px 40px; position:relative; text-align:center;">
+      <button onclick="closeTribePopup()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:var(--text-muted); font-size:1.5rem; cursor:pointer;">&times;</button>
+      <img src="logo.png" alt="CAC" style="width:80px; height:80px; object-fit:contain; margin-bottom:20px;" onerror="this.style.display='none'"/>
+      <span style="font-size:0.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--pink-hot); display:block; margin-bottom:12px;">Join The Movement</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:3px; margin-bottom:12px;">Join The Afta Curfew Tribe</h2>
+      <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7; margin-bottom:30px;">Be the first to know about new episodes, merch drops and live show tickets. The Tribe always gets access before anyone else.</p>
 
-  
+      <form onsubmit="handleTribeSignup(event)" style="display:flex; flex-direction:column; gap:14px;">
+        <input type="email" id="tribe-email" placeholder="Your email address" required style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); color:white; padding:14px 18px; font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none; width:100%; box-sizing:border-box;"/>
+        <div style="position:relative;">
+          <input type="tel" id="tribe-phone" placeholder="Phone number (optional — get text alerts)" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); color:white; padding:14px 18px; font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none; width:100%; box-sizing:border-box;"/>
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:0.65rem; color:var(--pink-hot); letter-spacing:2px; text-transform:uppercase;">Optional</span>
+        </div>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin:0;">Add your phone number and get early access to live show tickets before they go public to anyone else.</p>
+        <button type="submit" style="background:linear-gradient(135deg,var(--pink-hot),#cc0070); color:white; padding:16px; border:none; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; margin-top:6px;">Join The Tribe</button>
+      </form>
+      <button onclick="closeTribePopup()" style="background:none; border:none; color:var(--text-muted); font-size:0.75rem; cursor:pointer; margin-top:16px; text-decoration:underline;">No thanks, I'll miss out</button>
+    </div>
+  </div>
+
+  <script>
+    // TRIBE POPUP
+    function showTribePopup() {
+      const popup = document.getElementById('tribe-popup');
+      if (popup && !localStorage.getItem('tribe-signed-up') && !sessionStorage.getItem('popup-shown')) {
+        popup.style.display = 'flex';
+        sessionStorage.setItem('popup-shown', 'true');
+      }
+    }
+
+    function closeTribePopup() {
+      document.getElementById('tribe-popup').style.display = 'none';
+    }
+
+    function handleTribeSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('tribe-email').value;
+      const phone = document.getElementById('tribe-phone').value;
+      // Send to your email via Formspree
+      fetch('https://formspree.io/f/xbdwowlb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: email, 
+          phone: phone || 'Not provided',
+          type: 'Tribe Signup'
+        })
+      }).then(function() {
+        var popup = document.getElementById('tribe-popup');
+        popup.innerHTML = '';
+        var wrapper = document.createElement('div');
+        wrapper.style.cssText = 'text-align:center; padding:60px 40px;';
+        var title = document.createElement('h2');
+        title.style.cssText = 'font-family:Bebas Neue,sans-serif; font-size:2.5rem; color:white; letter-spacing:3px; margin-bottom:16px;';
+        title.textContent = 'Welcome To The Tribe';
+        var msg = document.createElement('p');
+        msg.style.cssText = 'color:#b899d4; font-size:0.95rem; line-height:1.7;';
+        msg.textContent = 'You are locked in. We will hit you first when something drops. Keep it honest. Keep it grown.';
+        var btn = document.createElement('button');
+        btn.style.cssText = 'margin-top:24px; background:linear-gradient(135deg,#ff2d8f,#cc0070); color:white; padding:14px 32px; border:none; font-family:DM Sans,sans-serif; font-weight:500; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer;';
+        btn.textContent = 'Lets Go';
+        btn.onclick = closeTribePopup;
+        wrapper.appendChild(title);
+        wrapper.appendChild(msg);
+        wrapper.appendChild(btn);
+        popup.appendChild(wrapper);
+        localStorage.setItem('tribe-signed-up', 'true');
+      }).catch(function() {
+        alert('Something went wrong. Please try again.');
+      });
+    }
+
+    // Show popup after 8 seconds
+    setTimeout(showTribePopup, 8000);
+  </script>
 
 
   <!-- KLAVIYO ONSITE TRACKING -->
