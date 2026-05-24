@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confessions Afta Curfew — Sponsor Pitch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --purple-deep: #0d0018;
+      --purple-mid: #1a0030;
+      --purple-bright: #3d0068;
+      --pink-hot: #ff2d8f;
+      --pink-soft: #ff6db3;
+      --white: #ffffff;
+      --text-muted: #b899d4;
+      --off-white: #f0e6ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--purple-deep);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 40px;
+      margin-bottom: 60px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid rgba(255,45,143,0.2);
+    }
+
+    .brand-tag {
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .show-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      letter-spacing: 4px;
+      line-height: 0.9;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .show-title span {
+      color: var(--pink-hot);
+    }
+
+    .show-sub {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .produced-by {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .xlnz {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      color: var(--pink-hot);
+    }
+
+    .contact-block {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+
+    .contact-block a {
+      color: var(--pink-hot);
+      text-decoration: none;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, var(--pink-hot), transparent);
+      margin: 30px 0;
+    }
+
+    /* ABOUT SECTION */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      align-items: start;
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--pink-hot);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .body-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .body-text strong {
+      color: var(--off-white);
+      font-weight: 500;
+    }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 60px;
+    }
+
+    .stat-box {
+      background: rgba(255,45,143,0.06);
+      border: 1px solid rgba(255,45,143,0.15);
+      padding: 30px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--pink-hot), transparent);
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      color: var(--pink-hot);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .stat-growth {
+      font-size: 0.7rem;
+      color: #4ade80;
+      margin-top: 6px;
+      letter-spacing: 1px;
+    }
+
+    /* AUDIENCE SECTION */
+    .audience {
+      margin-bottom: 60px;
+      padding: 40px;
+      background: rgba(61,0,104,0.3);
+      border: 1px solid rgba(255,45,143,0.15);
+      position: relative;
+    }
+
+    .audience::before {
+      content: '"';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12rem;
+      color: rgba(255,45,143,0.06);
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      line-height: 1;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .audience-item {
+      border-left: 2px solid var(--pink-hot);
+      padding-left: 16px;
+    }
+
+    .audience-item-label {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .audience-item-value {
+      font-size: 0.9rem;
+      color: var(--off-white);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* PACKAGES */
+    .packages {
+      margin-bottom: 60px;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 30px;
+    }
+
+    .package-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 32px 24px;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .package-card.featured {
+      background: rgba(255,45,143,0.08);
+      border-color: rgba(255,45,143,0.4);
+    }
+
+    .package-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--pink-hot);
+      color: white;
+      font-size: 0.55rem;
+      letter-spacing: 3px;
+      padding: 4px 12px;
+      white-space: nowrap;
+    }
+
+    .package-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .package-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--pink-hot);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin: 16px 0;
+    }
+
+    .package-price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .package-features {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .package-features li {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .package-features li::before {
+      content: '✦';
+      color: var(--pink-hot);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* WHY NOW */
+    .why-now {
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .why-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 30px;
+    }
+
+    .why-box-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: var(--pink-hot);
+      margin-bottom: 12px;
+    }
+
+    .why-box-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* FOUNDING LOCK */
+    .founding {
+      background: linear-gradient(135deg, rgba(255,45,143,0.12), rgba(61,0,104,0.4));
+      border: 1px solid rgba(255,45,143,0.3);
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founding::after {
+      content: 'FOUNDING RATE';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8rem;
+      color: rgba(255,45,143,0.04);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      letter-spacing: 8px;
+    }
+
+    .founding-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 4px;
+      color: var(--white);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .founding-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .founding-text strong {
+      color: var(--pink-hot);
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid rgba(255,45,143,0.15);
+      padding-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .footer-left p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .footer-left a {
+      color: var(--pink-hot);
+      text-decoration: none;
+    }
+
+    .footer-cta {
+      text-align: right;
+    }
+
+    .cta-label {
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink-hot), #cc0070);
+      color: white;
+      padding: 16px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* GLOW ACCENT */
+    .glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,45,143,0.08) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-2 {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(61,0,104,0.4) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @media print {
+      body { background: #0d0018; }
+      .glow, .glow-2 { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .page { padding: 40px 20px; }
+      .header { grid-template-columns: 1fr; }
+      .header-right { text-align: left; }
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .audience-grid { grid-template-columns: 1fr; gap: 20px; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .why-now { grid-template-columns: 1fr; }
+      .footer { grid-template-columns: 1fr; }
+      .footer-cta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow"></div>
+  <div class="glow-2"></div>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div>
+        <span class="brand-tag">Sponsorship Opportunities — 2026</span>
+        <h1 class="show-title">Confessions<br><span>Afta</span><br>Curfew</h1>
+        <p class="show-sub">Philadelphia's Most Unfiltered Adult Podcast</p>
+      </div>
+      <div class="header-right">
+        <p class="produced-by">Produced By</p>
+        <p class="xlnz">XLNZ Productions</p>
+        <div class="contact-block">
+          <p>Buhzz Taylor — Founder</p>
+          <p><a href="mailto:ConfessionsAftaCurfew@gmail.com">ConfessionsAftaCurfew@gmail.com</a></p>
+          <p><a href="tel:2679223301">267.922.3301</a></p>
+          <p><a href="https://buhzz.com" target="_blank">Buhzz.com</a></p>
+          <p>@confessionsaftacurfew</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about">
+      <div>
+        <span class="section-label">The Show</span>
+        <h2 class="section-heading">What Is CAC</h2>
+        <p class="body-text">
+          Confessions Afta Curfew is <strong>Philadelphia's most unfiltered adult podcast</strong> covering relationships, sex, culture, and the conversations people are actually having after hours. Hosted by <strong>Buhzz Taylor</strong> alongside co-host <strong>Luv Bug</strong> and featuring a rotating cast of bold guests, every episode is built around one thing: the truth people are afraid to say out loud.
+          <br><br>
+          New episodes drop every other Wednesday at 3:33pm. Clips go viral across Instagram, TikTok, and YouTube weekly.
+        </p>
+      </div>
+      <div>
+        <span class="section-label">Why It Works</span>
+        <h2 class="section-heading">The Formula</h2>
+        <p class="body-text">
+          CAC pulls four audiences simultaneously. <strong>The topic</strong> draws people in. <strong>Buhzz's personality</strong> keeps them. <strong>Luv Bug</strong> creates divided loyalty. Love her or hate her, both are obsession. <strong>Guests</strong> bring their own audiences every episode, expanding reach organically with every drop.
+          <br><br>
+          This is not entertainment. This is <strong>therapy wrapped in a party</strong>. And nobody on the internet does it quite like this.
+        </p>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <span class="section-label">By The Numbers — May 2026</span>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number">151K</div>
+        <div class="stat-label">Instagram Views<br>Last 30 Days</div>
+        <div class="stat-growth">↑ 419.5%</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">57K</div>
+        <div class="stat-label">Unique Accounts<br>Reached on Instagram</div>
+        <div class="stat-growth">↑ 419.5%</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">1,967</div>
+        <div class="stat-label">Instagram Followers<br>Growing Daily</div>
+        <div class="stat-growth">↑ 256% in 8 Days</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">11.3K</div>
+        <div class="stat-label">YouTube Views<br>Last 28 Days</div>
+        <div class="stat-growth">↑ 397%</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">123</div>
+        <div class="stat-label">YouTube Watch Hours<br>Last 28 Days</div>
+        <div class="stat-growth">↑ 251%</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">200K+</div>
+        <div class="stat-label">Combined Monthly<br>Impressions</div>
+        <div class="stat-growth">Across All Platforms</div>
+      </div>
+    </div>
+
+    <!-- AUDIENCE -->
+    <div class="audience">
+      <span class="section-label">Who Is Listening</span>
+      <h2 class="section-heading">The Audience</h2>
+      <div class="audience-grid">
+        <div class="audience-item">
+          <p class="audience-item-label">Age Range</p>
+          <p class="audience-item-value">30 to 50 Years Old<br>Peak Spending Power</p>
+        </div>
+        <div class="audience-item">
+          <p class="audience-item-label">Gender Split</p>
+          <p class="audience-item-value">Women show up live.<br>Men engage online.<br>Both are loyal.</p>
+        </div>
+        <div class="audience-item">
+          <p class="audience-item-label">Psychographic</p>
+          <p class="audience-item-value">Adults who want real conversations about real life. Loyal. Opinionated. Buying.</p>
+        </div>
+        <div class="audience-item">
+          <p class="audience-item-label">Discovery Source</p>
+          <p class="audience-item-value">87.8% of Instagram viewers are non-followers. Organic reach is explosive.</p>
+        </div>
+        <div class="audience-item">
+          <p class="audience-item-label">Content Behavior</p>
+          <p class="audience-item-value">Clips go viral. Full episodes hold attention. 123 hours watched in 28 days.</p>
+        </div>
+        <div class="audience-item">
+          <p class="audience-item-label">Location</p>
+          <p class="audience-item-value">Philadelphia based. National reach. Philly, New Jersey, Atlanta, DMV, New York.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="packages">
+      <span class="section-label">Partnership Tiers</span>
+      <h2 class="section-heading">Sponsorship Packages</h2>
+      <div class="packages-grid">
+
+        <div class="package-card">
+          <p class="package-name">Curfew Circle</p>
+          <div class="package-price">$150 <span>/mo</span></div>
+          <ul class="package-features">
+            <li>Logo on all CAC clips and content</li>
+            <li>Verbal mention on one episode per month</li>
+            <li>Tagged in one dedicated Instagram story per month</li>
+            <li>Listed as show supporter in episode description</li>
+          </ul>
+        </div>
+
+        <div class="package-card featured">
+          <p class="package-name">After Hours Partner</p>
+          <div class="package-price">$350 <span>/mo</span></div>
+          <ul class="package-features">
+            <li>Everything in Curfew Circle</li>
+            <li>30 second ad read on two episodes per month</li>
+            <li>One dedicated Instagram Reel mention</li>
+            <li>Logo on YouTube thumbnails</li>
+            <li>Tagged across Instagram and TikTok content</li>
+          </ul>
+        </div>
+
+        <div class="package-card">
+          <p class="package-name">Confessions Family</p>
+          <div class="package-price">$750 <span>/mo</span></div>
+          <ul class="package-features">
+            <li>This episode is brought to you by</li>
+            <li>60 second integrated ad read per episode</li>
+            <li>Logo on all clips and all content</li>
+            <li>Two dedicated social posts per month</li>
+            <li>First right of refusal on live event sponsorship</li>
+            <li>Direct line to host for campaign alignment</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WHY NOW -->
+    <span class="section-label">The Opportunity</span>
+    <div class="why-now">
+      <div class="why-box">
+        <p class="why-box-title">Why CAC</p>
+        <p class="why-box-text">
+          Confessions Afta Curfew is not just a podcast. It is a content ecosystem. Every episode produces clips that get pushed to tens of thousands of new accounts organically. Your brand rides that wave every single time without paying for ads.
+        </p>
+      </div>
+      <div class="why-box">
+        <p class="why-box-title">Why Now</p>
+        <p class="why-box-text">
+          The show is in its fastest growth period right now. Instagram reach up 419%. YouTube up 397%. This is the moment to lock in founding rates before the audience doubles again and rates reflect that.
+        </p>
+      </div>
+      <div class="why-box">
+        <p class="why-box-title">The Audience Trusts Buhzz</p>
+        <p class="why-box-text">
+          When the host of an unfiltered podcast recommends something the audience listens. CAC listeners are not passive. They call the hotline. They comment. They buy. Your brand gets introduced by someone they already trust.
+        </p>
+      </div>
+      <div class="why-box">
+        <p class="why-box-title">Multi Platform Reach</p>
+        <p class="why-box-text">
+          One partnership gets your brand on YouTube, Instagram, TikTok, and our growing SMS tribe list simultaneously. No other media buy at this price point gets you across four active channels with a loyal adult audience.
+        </p>
+      </div>
+    </div>
+
+    <!-- FOUNDING LOCK -->
+    <div class="founding">
+      <h2 class="founding-title">Founding Partner Rate Lock</h2>
+      <p class="founding-text">
+        Brands who partner with CAC before we hit <strong>5,000 Instagram followers</strong> lock in these rates for 6 months. Once we cross that threshold rates increase to reflect the audience size. We are at 1,967 followers today and growing at over 200 per day. <strong>The window is closing fast.</strong>
+        <br><br>
+        Terms available: 1 month, 3 months, or 6 months at founding rate.
+      </p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <p>
+          <strong style="color:var(--off-white);">Confessions Afta Curfew</strong> — Produced by XLNZ Productions<br>
+          New episodes every other Wednesday at 3:33pm<br>
+          <a href="https://buhzz.com" target="_blank">Buhzz.com</a> &nbsp;·&nbsp;
+          <a href="mailto:ConfessionsAftaCurfew@gmail.com">ConfessionsAftaCurfew@gmail.com</a> &nbsp;·&nbsp;
+          <a href="tel:2679223301">267.922.3301</a><br>
+          @confessionsaftacurfew on Instagram, TikTok, and YouTube
+        </p>
+      </div>
+      <div class="footer-cta">
+        <p class="cta-label">Ready To Partner</p>
+        <a href="mailto:ConfessionsAftaCurfew@gmail.com" class="cta-button">Let's Talk</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
