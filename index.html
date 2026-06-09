@@ -1796,8 +1796,9 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="flex-wrap:wrap; gap:20px;">
       <p>© 2026 Confessions Afta Curfew · BuhzzTaylor.com · XLNZ Productions · All Rights Reserved · <a href="/privacy.html" style="color:var(--text-muted); text-decoration:none;" onmouseover="this.style.color='#ff2d8f'" onmouseout="this.style.color=''">Privacy Policy & Terms</a></p>
+      <button onclick="document.getElementById('tip-modal').style.display='flex'" style="background:linear-gradient(135deg,#ff2d8f,#cc0070); color:white; border:none; padding:10px 24px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); box-shadow:0 4px 20px rgba(255,45,143,0.4);">💚 Tip The Podcast</button>
       <div class="social-links">
         <a href="https://www.instagram.com/confessionsaftacurfew" target="_blank" class="social-link">IG</a>
         <a href="https://www.tiktok.com/@confessionsaftacurfew" target="_blank" class="social-link">TT</a>
@@ -1869,5 +1870,19 @@
       setInterval(updateSickosCountdown, 1000);
     })();
   </script>
+
+  <!-- TIP THE PODCAST MODAL -->
+  <div id="tip-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:linear-gradient(135deg,rgba(26,0,48,0.99),rgba(61,0,104,0.95)); border:1px solid rgba(255,45,143,0.4); padding:40px 36px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 0 60px rgba(255,45,143,0.3);">
+      <button onclick="document.getElementById('tip-modal').style.display='none'" style="position:absolute; top:14px; right:18px; background:none; border:none; color:var(--pink-hot,#ff2d8f); font-size:1.6rem; cursor:pointer; line-height:1;">&times;</button>
+      <p style="font-size:0.6rem; letter-spacing:5px; text-transform:uppercase; color:#ff2d8f; margin-bottom:10px; font-family:'DM Sans',sans-serif;">Support The Show</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.4rem; letter-spacing:4px; color:white; margin-bottom:6px; line-height:1;">TIP THE PODCAST</h2>
+      <p style="font-size:0.85rem; color:#b899d4; line-height:1.7; margin-bottom:24px; font-family:'DM Sans',sans-serif;">No label. No budget. Just us and you. If Confessions Afta Curfew has ever made you laugh, think, or feel seen — scan below and send what you can. Every dollar keeps this show real and keeps it ours.</p>
+      <div style="background:white; padding:16px; display:inline-block; margin-bottom:20px; box-shadow:0 0 30px rgba(255,45,143,0.4);">
+        <img src="cashapp-qr.png" alt="Cash App QR Code" style="width:220px; height:220px; display:block;"/>
+      </div>
+      <p style="font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#b899d4; font-family:'DM Sans',sans-serif;">Scan with your camera or Cash App</p>
+    </div>
+  </div>
 </body>
 </html>
