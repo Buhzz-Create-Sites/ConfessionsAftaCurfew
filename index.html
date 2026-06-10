@@ -47,6 +47,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
+      transition: top 0.2s ease;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -889,6 +890,8 @@
     /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
+      nav > div { gap: 10px; }
+      nav > div button { font-size: 0.55rem; padding: 6px 12px; letter-spacing: 1px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       #latest > .container > .reveal { grid-template-columns: 1fr !important; gap: 30px !important; }
@@ -934,9 +937,28 @@
     </p>
   </div>
 
+
+  <script>
+    // Position nav below announcement bar
+    function positionNav() {
+      var bar = document.getElementById('announcement-bar');
+      var nav = document.querySelector('nav');
+      if (bar && nav) {
+        var barH = bar.offsetHeight;
+        nav.style.top = barH + 'px';
+        document.body.style.paddingTop = (barH + nav.offsetHeight) + 'px';
+      }
+    }
+    positionNav();
+    window.addEventListener('resize', positionNav);
+  </script>
+
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">CAC</a>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a href="#" class="nav-logo">CAC</a>
+      <button onclick="document.getElementById('tip-modal').style.display='flex'" style="background:linear-gradient(135deg,#ff2d8f,#cc0070); color:white; border:none; padding:7px 16px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); box-shadow:0 3px 14px rgba(255,45,143,0.45); white-space:nowrap; flex-shrink:0;">💚 Tip The Podcast</button>
+    </div>
     <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
