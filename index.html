@@ -45,7 +45,7 @@
     /* NAV */
     nav {
       position: fixed;
-      top: 52px; left: 0; right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 999;
       display: flex;
       justify-content: space-between;
@@ -942,8 +942,8 @@
     function positionNav() {
       var bar = document.getElementById('announcement-bar');
       var nav = document.querySelector('nav');
-      if (bar && nav) {
-        var barH = bar.offsetHeight;
+      if (nav) {
+        var barH = bar ? bar.offsetHeight : 0;
         nav.style.top = barH + 'px';
         document.body.style.paddingTop = (barH + nav.offsetHeight) + 'px';
       }
@@ -951,15 +951,6 @@
     positionNav();
     window.addEventListener('resize', positionNav);
   </script>
-
-  <!-- MEET THE SICKOS ANNOUNCEMENT BAR -->
-  <div id="announcement-bar" style="background: linear-gradient(135deg, var(--pink-hot), #cc0070); padding: 8px 20px; position: relative; z-index: 1001; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-    <img src="meet-the-sickos.jpg" alt="Meet The Sickos" style="height: 36px; width: auto; object-fit: cover; border-radius: 2px; flex-shrink: 0;"/>
-    <p style="margin: 0; font-size: 0.85rem; font-weight: 500; color: white; letter-spacing: 1px;">
-      <strong>RED CARPET PREMIERE AUGUST 2ND</strong>. Buhzz Taylor stars in <strong>Meet The Sickos</strong> <span id="sickos-bar-cd" style="font-family:'Bebas Neue',sans-serif; font-size:0.9rem; letter-spacing:2px; color:white; margin-left:10px; opacity:0.9;"></span>
-      <a href="https://www.tickettailor.com/events/noegosworldmediallc/2271770" target="_blank" style="color: white; font-weight: 700; margin-left: 12px; padding: 4px 14px; border: 2px solid white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">GET TICKETS →</a>
-    </p>
-  </div>
 
   <!-- NAV -->
   <nav>
@@ -1907,7 +1898,7 @@
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
       const bar = document.getElementById('announcement-bar');
-      const barH = bar ? bar.offsetHeight : 52;
+      const barH = bar ? bar.offsetHeight : 0;
       if (window.scrollY > barH) {
         nav.style.top = '0';
       } else {
