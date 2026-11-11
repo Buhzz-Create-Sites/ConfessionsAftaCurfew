@@ -1230,7 +1230,7 @@
         <div class="divider"></div>
         <p class="section-desc">Real talk. No filter. No fake drama. Just raw conversations from people who actually lived it.</p>
       </div>
-      <div class="listen-grid reveal">
+      <div class="listen-grid">
         <div style="display: flex; flex-direction: column; gap: 30px;">
           <div class="episode-card">
             <div class="ep-number">Episode 16, Latest</div>
@@ -1899,7 +1899,7 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
     reveals.forEach(el => observer.observe(el));
 
     // SMOOTH NAV BACKGROUND
