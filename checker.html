@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Score Checker | CAC</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;min-height:100vh;background:#14081c;color:#fff;font-family:'DM Sans',Arial,sans-serif;display:flex;justify-content:center;padding:28px 16px;box-sizing:border-box}
+  .box{width:100%;max-width:420px}
+  h1{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:44px;margin:0;color:#ff2d8f}
+  p{color:#b899d4;font-size:14px;line-height:1.5}
+  label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#b899d4;margin:16px 0 6px}
+  input{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:8px;border:2px solid #3a1250;background:#1f0d2b;color:#fff;font-size:17px}
+  input:focus{outline:none;border-color:#ff2d8f}
+  #code{text-transform:uppercase;letter-spacing:4px;font-family:'Courier New',monospace;font-weight:700}
+  button{margin-top:20px;width:100%;font-family:'Bebas Neue',Impact,sans-serif;font-size:28px;padding:10px;border:0;border-radius:8px;background:#ff2d8f;color:#fff;cursor:pointer}
+  #out{margin-top:20px;border-radius:12px;padding:18px;text-align:center;font-family:'Bebas Neue',Impact,sans-serif;font-size:34px;display:none}
+  .ok{background:#0f3d24;border:2px solid #3ddc84;color:#3ddc84}
+  .bad{background:#3d0f1a;border:2px solid #ff4d6d;color:#ff4d6d}
+  #out small{display:block;font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#ddd;margin-top:6px;letter-spacing:0}
+  .log{margin-top:26px;font-size:13px;color:#ddd}
+  .log div{padding:6px 0;border-bottom:1px solid #2a1438}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Score Checker</h1>
+  <p>Type what is on the player's screenshot exactly. Real scores pass. If someone edited the score or name, the code will not match.</p>
+  <label for="name">IG username</label>
+  <input id="name" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="without the @">
+  <label for="score">Score</label>
+  <input id="score" inputmode="numeric" autocomplete="off" placeholder="commas are fine">
+  <label for="code">Verification code</label>
+  <input id="code" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false">
+  <button id="go">Check</button>
+  <div id="out"></div>
+  <div class="log" id="log"></div>
+</div>
+<script>
+  const SECRET = 'redDoor333_afta_curfew_tribe_Dec26';
+const ALPHA = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+function vcode(name, score) {
+  const s = String(name).trim().toLowerCase().replace(/^@/, '') + '|' + Math.floor(score) + '|' + SECRET;
+  let h1 = 0x811c9dc5, h2 = 0x9e3779b1;
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 16777619) >>> 0;
+    h2 = Math.imul(h2 ^ (c + i), 2246822519) >>> 0;
+    h2 = ((h2 << 13) | (h2 >>> 19)) >>> 0;
+  }
+  let n = (h1 ^ h2) >>> 0, out = '';
+  for (let i = 0; i < 6; i++) { out += ALPHA[n % ALPHA.length]; n = Math.floor(n / ALPHA.length) ^ (h1 >>> (i * 3)); n >>>= 0; }
+  return out;
+}
+const $ = id => document.getElementById(id);
+function check() {
+  const name = $('name').value.trim().replace(/^@/, '');
+  const score = parseInt($('score').value.replace(/[^0-9]/g, ''), 10);
+  const code = $('code').value.trim().toUpperCase();
+  const out = $('out'); out.style.display = 'block';
+  if (!name || isNaN(score) || code.length !== 6) { out.className = 'bad'; out.innerHTML = 'Missing info<small>Fill in all three boxes.</small>'; return; }
+  const real = vcode(name, score);
+  if (real === code) { out.className = 'ok'; out.innerHTML = 'Real Score<small>@' + name + ' with ' + score.toLocaleString() + ' checks out.</small>'; }
+  else { out.className = 'bad'; out.innerHTML = 'Does Not Match<small>Double check what you typed. If it is typed right, the screenshot was edited.</small>'; }
+  const row = document.createElement('div');
+  row.textContent = (real === code ? 'REAL  ' : 'FAKE  ') + '@' + name + '  ' + score.toLocaleString() + '  ' + code;
+  $('log').prepend(row);
+}
+$('go').onclick = check;
+['name', 'score', 'code'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') check(); }));
+</script>
+</body>
+</html>

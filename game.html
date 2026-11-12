@@ -49,6 +49,23 @@
   .send{font-size:12.5px;color:#ddd;line-height:1.5;max-width:340px;margin-bottom:8px}
   .send b{color:var(--pink)}
   .verdict{font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;color:var(--pink);margin-bottom:8px}
+  .code-in{margin-top:10px}
+  .getcode{font-size:12.5px;color:var(--lav);margin:8px 0 2px;max-width:320px;line-height:1.45}
+  .getcode a,.links a{color:var(--pink);font-weight:700}
+  .banner{font-size:12px;font-weight:700;letter-spacing:1px;color:#14081c;background:var(--gold);border-radius:20px;padding:5px 14px;margin:0 0 12px}
+  .lb{width:100%;max-width:340px;border:1px solid rgba(255,45,143,.35);border-radius:12px;padding:10px 14px;margin:14px 0 6px;text-align:left}
+  .lb h3{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:24px;margin:0 0 6px;color:var(--gold);text-align:center}
+  .lb ol{margin:0;padding-left:22px;font-size:14px;line-height:1.7}
+  .lb ol b{float:right;color:var(--gold)}
+  .lb .upd{font-size:11px;color:#aaa;text-align:center;margin-top:4px}
+  .links{font-size:12.5px;margin:10px 0 4px}
+  .practice{font-family:'Bebas Neue',Impact,sans-serif;font-size:22px;color:var(--gold);line-height:1.1}
+  .unlock{max-width:340px;font-size:13.5px;line-height:1.5;color:#ddd;background:rgba(255,210,63,.1);border:1px solid rgba(255,210,63,.5);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+  .unlock b{color:var(--gold)}
+  input[type=email],input[type=tel]{width:100%;max-width:300px;padding:12px 14px;border-radius:8px;border:2px solid var(--pink);background:#1a0030;color:#fff;font-size:16px;text-align:center;outline:none}
+  #signup{justify-content:flex-start;overflow-y:auto;touch-action:pan-y;padding-top:40px}
+  label.sms{display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:10.5px;line-height:1.4;color:#bbb;margin:12px 0 4px}
+  label.sms input{width:18px;height:18px;flex-shrink:0;accent-color:var(--pink);margin-top:1px}
   .choice p{max-width:330px;font-size:14px;line-height:1.5;color:#ddd}
 </style>
 </head>
@@ -58,6 +75,7 @@
 
   <div id="title" class="ov">
     <h1>Make It <span class="pk">Rain</span><br>Before Curfew</h1>
+    <div class="banner" id="banner">CONTEST RUNS DECEMBER 1 TO 31</div>
     <p class="sub">A Confessions Afta Curfew game. Highest score in December wins the CAC bookbag.</p>
     <div class="prize">
       <div class="win">Win This Bookbag</div>
@@ -66,6 +84,8 @@
       <div class="pz">Official Confessions Afta Curfew bookbag. $50 value.</div>
     </div>
     <input id="name" type="text" maxlength="24" placeholder="Your IG username" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <input id="acode" class="code-in" type="text" maxlength="40" placeholder="Access code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <div class="getcode" id="getcode">No code yet? <a href="#" id="getCodeLink">Get your free code</a>, or tap Play for a practice round.</div>
     <label class="age"><input id="age" type="checkbox"> I am 18 or older</label>
     <div class="err" id="err"></div>
     <button class="btn" id="play">Play</button>
@@ -75,6 +95,8 @@
       Grab the <b>CAC Bookbag</b> for 3,000. Catch <b>Buhzz</b> for double points. Snatch <b>The Bag</b> if you're brave.<br>
       Make it to <b>midnight</b> and you get a choice. Go home, or stay out past curfew for triple points and risk it all.
     </div>
+    <div class="lb" id="lb"><h3>Leaderboard</h3><ol id="lbList"></ol><div class="upd" id="lbUpd"></div></div>
+    <div class="links"><a href="rules.html" target="_blank">Official Rules</a></div>
   </div>
 
   <div id="choice" class="ov choice hidden">
@@ -95,9 +117,30 @@
       <div class="code" id="oCode">XXXXXX</div>
       <div class="meta" id="oMeta"></div>
     </div>
-    <div class="send">Screenshot this card and send it to <b>ConfessionsAftaCurfew@gmail.com</b> or DM <b>@confessionsaftacurfew</b> on IG with your IG username, phone number, and email.</div>
+    <div class="unlock hidden" id="oUnlock"><b>That run didn't count.</b> Get your free code to make your scores count for the bookbag.<br><button class="btn" id="oGetCode" style="font-size:22px;padding:8px 22px;margin-top:8px">Get My Code</button></div>
+    <div class="send" id="oSend">Screenshot this card and send it to <b>ConfessionsAftaCurfew@gmail.com</b> or DM <b>@confessionsaftacurfew</b> on IG with your IG username, phone number, and email.</div>
     <div class="send" id="oBest"></div>
+    <div class="links"><a href="rules.html" target="_blank">Official Rules</a></div>
     <button class="btn" id="again">Play Again</button>
+  </div>
+
+  <div id="signup" class="ov hidden">
+    <h1 style="font-size:40px">Get Your <span class="pk">Code</span></h1>
+    <p class="sub" style="margin-bottom:10px">Join the CAC Tribe and we'll email your access code in about a minute.</p>
+    <div id="suForm" style="width:100%;max-width:320px">
+      <input id="suEmail" type="email" placeholder="Email" autocomplete="email" autocapitalize="off" spellcheck="false" style="margin-bottom:10px">
+      <input id="suPhone" type="tel" placeholder="Phone number (optional)" autocomplete="tel">
+      <label class="sms"><input id="suSms" type="checkbox"> <span>Text me too. By checking this box, you agree to receive recurring automated marketing text messages from Confessions Afta Curfew at the number provided. Consent is not a condition of purchase. Msg and data rates may apply. Msg frequency varies. Reply HELP for help or STOP to cancel.</span></label>
+      <div class="err" id="suErr"></div>
+      <button class="btn" id="suGo">Send My Code</button>
+      <button class="btn alt" id="suBack" style="font-size:20px;padding:6px 20px">Back</button>
+    </div>
+    <div id="suDone" class="hidden" style="width:100%;max-width:320px">
+      <p class="sub" style="color:#fff;font-size:16px">Check your email. Your code is on the way. Check spam or promotions if you don't see it.</p>
+      <input id="suCode" type="text" placeholder="Enter your code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <div class="err" id="suCodeErr"></div>
+      <button class="btn" id="suUnlock">Unlock</button>
+    </div>
   </div>
 
   <button id="gohome" class="hidden">Go Home</button>
@@ -260,6 +303,35 @@ function CACChip(actx, out) {
     for (let i = 0; i < 6; i++) { out += ALPHA[n % ALPHA.length]; n = Math.floor(n / ALPHA.length) ^ (h1 >>> (i * 3)); n >>>= 0; }
     return out;
   }
+
+
+  // ====== CONTEST SETTINGS ======
+  // Leaderboard: update weekly. Format: ['igusername', score]
+  const LEADERS = [];
+  const LEADERS_UPDATED = '';
+  const CONTEST_START = Date.UTC(2026, 11, 1, 5, 0, 0);   // Dec 1, 2026 12:00 AM Eastern
+  const CONTEST_END = Date.UTC(2027, 0, 1, 5, 0, 0);      // Jan 1, 2027 12:00 AM Eastern
+  const TEST_MODE = /[?&]test=1/.test(location.search);
+  function contestLive() { const n = Date.now(); return TEST_MODE || (n >= CONTEST_START && n < CONTEST_END); }
+  (function initBanner() {
+    const n = Date.now(), b = $('banner');
+    if (TEST_MODE) b.textContent = 'TEST MODE. CODES ALWAYS SHOW';
+    else if (n < CONTEST_START) b.textContent = 'PRACTICE NOW. SCORES COUNT DECEMBER 1 TO 31';
+    else if (n >= CONTEST_END) b.textContent = 'CONTEST CLOSED. WINNER ANNOUNCED SOON';
+    else b.textContent = 'CONTEST IS LIVE. ENDS DECEMBER 31 AT 11:59 PM';
+  })();
+  (function initBoard() {
+    const ol = $('lbList');
+    if (!LEADERS.length) { ol.outerHTML = '<div style="font-size:13px;color:#ddd;text-align:center">Leaderboard updates every week starting December 1.</div>'; return; }
+    LEADERS.slice(0, 10).forEach(([n, sc]) => { const li = document.createElement('li'); li.textContent = '@' + n; const b = document.createElement('b'); b.textContent = Number(sc).toLocaleString(); li.appendChild(b); ol.appendChild(li); });
+    $('lbUpd').textContent = LEADERS_UPDATED ? 'Updated ' + LEADERS_UPDATED : '';
+  })();
+
+  // ====== ACCESS CODE (case sensitive) ======
+  const CODE_HASH = 'i17vsz';
+  function hashStr(str) { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619) >>> 0; return h.toString(36); }
+  function codeOK(v) { return hashStr(String(v).trim()) === CODE_HASH; }
+  if (store.get('cac_unlock') === CODE_HASH) { $('acode').value = ''; $('acode').placeholder = 'Code saved on this phone'; $('getcode').style.display = 'none'; }
 
   // ====== SOUND ======
   let actx = null, muted = store.get('cac_mute') === '1';
@@ -426,7 +498,11 @@ function CACChip(actx, out) {
     $('verdict').textContent = reason;
     $('oScore').textContent = final.toLocaleString();
     $('oName').textContent = '@' + name;
-    $('oCode').textContent = vcode(name, final);
+    const unlocked = store.get('cac_unlock') === CODE_HASH;
+    $('oUnlock').classList.toggle('hidden', unlocked); $('oSend').classList.toggle('hidden', !unlocked || !contestLive());
+    if (!unlocked) { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Practice round'; }
+    else if (contestLive()) { $('oCode').textContent = vcode(name, final); $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Verification Code'; }
+    else { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = Date.now() < CONTEST_START ? 'Scores count December 1 to 31' : 'Contest closed'; }
     const d = new Date();
     $('oMeta').textContent = 'Make It Rain Before Curfew · ' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     const best = Math.max(final, +(store.get('cac_best') || 0));
@@ -438,11 +514,73 @@ function CACChip(actx, out) {
   $('play').onclick = () => {
     const n = $('name').value.trim().replace(/^@/, '');
     if (n.length < 2) { $('err').textContent = 'Enter your IG username so we know who won.'; return; }
+    const saved = store.get('cac_unlock') === CODE_HASH, typed = $('acode').value.trim();
+    if (!saved && typed && !codeOK(typed)) { $('err').textContent = 'That code is not right. Check your caps and spacing, or leave it blank to practice.'; return; }
     if (!$('age').checked) { $('err').textContent = 'You have to be 18 or older to play.'; return; }
+    if (!saved && typed) unlock();
     $('err').textContent = ''; store.set('cac_name', n); store.set('cac_age', '1'); start();
   };
   $('again').onclick = start;
-  const _start = start;
+
+  // ====== SIGNUP (Klaviyo) ======
+  const KL_CO = 'XKmLcL', KL_EMAIL_LIST = 'SuR8aG', KL_SMS_LIST = 'Vxj6Ur', KL_REV = '2024-10-15';
+  function unlock() {
+    store.set('cac_unlock', CODE_HASH);
+    $('acode').value = ''; $('acode').placeholder = 'Code saved on this phone'; $('getcode').style.display = 'none';
+  }
+  function openSignup() {
+    $('suForm').classList.remove('hidden'); $('suDone').classList.add('hidden'); $('suErr').textContent = '';
+    $('over').classList.add('hidden'); $('signup').classList.remove('hidden');
+  }
+  $('getCodeLink').onclick = e => { e.preventDefault(); openSignup(); };
+  $('oGetCode').onclick = openSignup;
+  $('suBack').onclick = () => { $('signup').classList.add('hidden'); if (st === 'over') $('over').classList.remove('hidden'); };
+  function toE164(p) {
+    const d = String(p).replace(/[^0-9]/g, '');
+    if (d.length === 10) return '+1' + d;
+    if (d.length === 11 && d[0] === '1') return '+' + d;
+    return null;
+  }
+  async function kpost(path, body) {
+    const r = await fetch('https://a.klaviyo.com/client/' + path + '?company_id=' + KL_CO, {
+      method: 'POST', headers: { 'Content-Type': 'application/vnd.api+json', revision: KL_REV }, body: JSON.stringify(body)
+    });
+    if (!r.ok && r.status !== 202) throw new Error('Klaviyo ' + r.status);
+  }
+  $('suGo').onclick = async () => {
+    const email = $('suEmail').value.trim(), wantSms = $('suSms').checked, ig = ($('name').value.trim() || store.get('cac_name') || '').replace(/^@/, '');
+    const phone = $('suPhone').value.trim() ? toE164($('suPhone').value) : null;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('suErr').textContent = 'Enter a real email so we can send your code.'; return; }
+    if ($('suPhone').value.trim() && !phone) { $('suErr').textContent = 'Enter a 10 digit US phone number, or leave it blank.'; return; }
+    if (wantSms && !phone) { $('suErr').textContent = 'Add your phone number to get texts, or uncheck the box.'; return; }
+    $('suGo').disabled = true; $('suErr').textContent = 'Sending...';
+    const props = { ig_username: ig, signup_source: 'Make It Rain Game' };
+    try {
+      await kpost('subscriptions', { data: { type: 'subscription', attributes: { custom_source: 'Make It Rain Game',
+        profile: { data: { type: 'profile', attributes: { email, ...(phone ? { phone_number: phone } : {}), properties: props,
+          subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } } } } },
+        relationships: { list: { data: { type: 'list', id: KL_EMAIL_LIST } } } } });
+      if (wantSms) {
+        await kpost('subscriptions', { data: { type: 'subscription', attributes: { custom_source: 'Make It Rain Game',
+          profile: { data: { type: 'profile', attributes: { email, phone_number: phone, properties: props,
+            subscriptions: { sms: { marketing: { consent: 'SUBSCRIBED' } } } } } } },
+          relationships: { list: { data: { type: 'list', id: KL_SMS_LIST } } } } });
+      }
+      await kpost('events', { data: { type: 'event', attributes: { properties: { ig_username: ig, game: 'Make It Rain Before Curfew' },
+        metric: { data: { type: 'metric', attributes: { name: 'Requested Game Code' } } },
+        profile: { data: { type: 'profile', attributes: { email, properties: props } } } } } });
+      $('suForm').classList.add('hidden'); $('suDone').classList.remove('hidden');
+    } catch (err) {
+      $('suErr').textContent = 'Something went wrong. Try again, or DM @confessionsaftacurfew for your code.';
+    }
+    $('suGo').disabled = false;
+  };
+  $('suUnlock').onclick = () => {
+    if (!codeOK($('suCode').value)) { $('suCodeErr').textContent = 'That code is not right. Check your caps and spacing.'; return; }
+    unlock(); $('signup').classList.add('hidden');
+    if (st === 'over') { $('over').classList.add('hidden'); }
+    $('title').classList.remove('hidden'); $('err').textContent = 'Unlocked. Your scores count now.';
+  };
   $('home').onclick = () => { $('choice').classList.add('hidden'); endGame('You Made It Home'); };
   $('stay').onclick = () => {
     $('choice').classList.add('hidden'); overtime = true; st = 'play'; pot = 0; lives = 1; bagT = 12; buhzzT = 8;
