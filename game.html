@@ -117,6 +117,7 @@
       <div class="code" id="oCode">XXXXXX</div>
       <div class="meta" id="oMeta"></div>
     </div>
+    <div class="unlock hidden" id="oPre"><b>Practice round.</b> The contest starts December 1. Come back then and your best score in December wins the CAC bookbag.</div>
     <div class="unlock hidden" id="oUnlock"><b>That run didn't count.</b> Get your free code to make your scores count for the bookbag.<br><button class="btn" id="oGetCode" style="font-size:22px;padding:8px 22px;margin-top:8px">Get My Code</button></div>
     <div class="send" id="oSend">Screenshot this card and send it to <b>ConfessionsAftaCurfew@gmail.com</b> or DM <b>@confessionsaftacurfew</b> on IG with your IG username, phone number, and email.</div>
     <div class="send" id="oBest"></div>
@@ -331,6 +332,9 @@ function CACChip(actx, out) {
   const CODE_HASH = 'i17vsz';
   function hashStr(str) { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619) >>> 0; return h.toString(36); }
   function codeOK(v) { return hashStr(String(v).trim()) === CODE_HASH; }
+  // before December 1 the game is practice only: no access code anywhere
+  const PRE = !TEST_MODE && Date.now() < CONTEST_START;
+  if (PRE) { $('acode').style.display = 'none'; $('getcode').style.display = 'none'; }
   if (store.get('cac_unlock') === CODE_HASH) { $('acode').value = ''; $('acode').placeholder = 'Code saved on this phone'; $('getcode').style.display = 'none'; }
 
   // ====== SOUND ======
@@ -499,8 +503,9 @@ function CACChip(actx, out) {
     $('oScore').textContent = final.toLocaleString();
     $('oName').textContent = '@' + name;
     const unlocked = store.get('cac_unlock') === CODE_HASH;
-    $('oUnlock').classList.toggle('hidden', unlocked); $('oSend').classList.toggle('hidden', !unlocked || !contestLive());
-    if (!unlocked) { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Practice round'; }
+    $('oUnlock').classList.toggle('hidden', unlocked || PRE); $('oPre').classList.toggle('hidden', !PRE); $('oSend').classList.toggle('hidden', !unlocked || !contestLive());
+    if (PRE) { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Scores count December 1 to 31'; }
+    else if (!unlocked) { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Practice round'; }
     else if (contestLive()) { $('oCode').textContent = vcode(name, final); $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Verification Code'; }
     else { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = Date.now() < CONTEST_START ? 'Scores count December 1 to 31' : 'Contest closed'; }
     const d = new Date();
@@ -515,7 +520,7 @@ function CACChip(actx, out) {
     const n = $('name').value.trim().replace(/^@/, '');
     if (n.length < 2) { $('err').textContent = 'Enter your IG username so we know who won.'; return; }
     const saved = store.get('cac_unlock') === CODE_HASH, typed = $('acode').value.trim();
-    if (!saved && typed && !codeOK(typed)) { $('err').textContent = 'That code is not right. Check your caps and spacing, or leave it blank to practice.'; return; }
+    if (!PRE && !saved && typed && !codeOK(typed)) { $('err').textContent = 'That code is not right. Check your caps and spacing, or leave it blank to practice.'; return; }
     if (!$('age').checked) { $('err').textContent = 'You have to be 18 or older to play.'; return; }
     if (!saved && typed) unlock();
     $('err').textContent = ''; store.set('cac_name', n); store.set('cac_age', '1'); start();
