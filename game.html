@@ -85,7 +85,7 @@
     </div>
     <input id="name" type="text" maxlength="24" placeholder="Your IG username" autocomplete="off" autocapitalize="off" spellcheck="false">
     <input id="acode" class="code-in" type="text" maxlength="40" placeholder="Access code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
-    <div class="getcode" id="getcode">No code yet? <a href="#" id="getCodeLink">Get your free code</a>, or tap Play for a practice round.</div>
+    <div class="getcode" id="getcode">No code yet? <a href="#" id="getCodeLink">Get your free code</a> to make your scores count and play as much as you want. Without one you get 3 free practice runs a day.</div>
     <label class="age"><input id="age" type="checkbox"> I am 18 or older</label>
     <div class="err" id="err"></div>
     <button class="btn" id="play">Play</button>
@@ -118,7 +118,7 @@
       <div class="meta" id="oMeta"></div>
     </div>
     <div class="unlock hidden" id="oPre"><b>Practice round.</b> The contest starts December 1. Come back then and your best score in December wins the CAC bookbag.</div>
-    <div class="unlock hidden" id="oUnlock"><b>That run didn't count.</b> Get your free code to make your scores count for the bookbag.<br><button class="btn" id="oGetCode" style="font-size:22px;padding:8px 22px;margin-top:8px">Get My Code</button></div>
+    <div class="unlock hidden" id="oUnlock"><b>That run didn't count.</b> Get your free code to make your scores count for the bookbag and keep playing all day. <span id="oLeft"></span><br><button class="btn" id="oGetCode" style="font-size:22px;padding:8px 22px;margin-top:8px">Get My Code</button></div>
     <div class="send" id="oSend">Screenshot this card and send it to <b>ConfessionsAftaCurfew@gmail.com</b> or DM <b>@confessionsaftacurfew</b> on IG with your IG username, phone number, and email.</div>
     <div class="send" id="oBest"></div>
     <div class="links"><a href="rules.html" target="_blank">Official Rules</a></div>
@@ -127,7 +127,7 @@
 
   <div id="signup" class="ov hidden">
     <h1 style="font-size:40px">Get Your <span class="pk">Code</span></h1>
-    <p class="sub" style="margin-bottom:10px">Join the CAC Tribe and we'll email your access code in about a minute.</p>
+    <p class="sub" id="suSub" style="margin-bottom:10px">Join the CAC Tribe and we'll email your access code in about a minute.</p>
     <div id="suForm" style="width:100%;max-width:320px">
       <input id="suEmail" type="email" placeholder="Email" autocomplete="email" autocapitalize="off" spellcheck="false" style="margin-bottom:10px">
       <input id="suPhone" type="tel" placeholder="Phone number (optional)" autocomplete="tel">
@@ -484,7 +484,22 @@ function CACChip(actx, out) {
   }
 
   // ====== FLOW ======
+  // ====== FREE RUNS (from December 1, players without a code get 3 runs a day) ======
+  const FREE_RUNS = 3;
+  function today() { const d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  function runsUsed() { const v = String(store.get('cac_runs') || '').split('|'); return v[0] === today() ? +v[1] || 0 : 0; }
+  function freeLeft() { return Math.max(0, FREE_RUNS - runsUsed()); }
+  function gated() { return !PRE && store.get('cac_unlock') !== CODE_HASH; }
   function start() {
+    if (gated()) {
+      if (freeLeft() <= 0) {
+        openSignup();
+        $('title').classList.add('hidden');
+        $('suSub').innerHTML = '<b style="color:#fff">You used your 3 free runs today.</b> Join the CAC Tribe to keep playing as much as you want, and make your scores count for the bookbag. We\'ll email your code in about a minute.';
+        return;
+      }
+      store.set('cac_runs', today() + '|' + (runsUsed() + 1));
+    }
     reset(); st = 'play'; clearInterval(bagTimer);
     musicStop(true); musicRate(1); musicPlay();
     $('title').classList.add('hidden'); $('over').classList.add('hidden'); $('choice').classList.add('hidden');
@@ -503,7 +518,7 @@ function CACChip(actx, out) {
     $('oScore').textContent = final.toLocaleString();
     $('oName').textContent = '@' + name;
     const unlocked = store.get('cac_unlock') === CODE_HASH;
-    $('oUnlock').classList.toggle('hidden', unlocked || PRE); $('oPre').classList.toggle('hidden', !PRE); $('oSend').classList.toggle('hidden', !unlocked || !contestLive());
+    $('oUnlock').classList.toggle('hidden', unlocked || PRE); if (!unlocked && !PRE) { const l = freeLeft(); $('oLeft').textContent = l ? 'Free runs left today: ' + l + '.' : 'That was your last free run today.'; } $('oPre').classList.toggle('hidden', !PRE); $('oSend').classList.toggle('hidden', !unlocked || !contestLive());
     if (PRE) { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Scores count December 1 to 31'; }
     else if (!unlocked) { $('oCode').textContent = 'PRACTICE'; $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Practice round'; }
     else if (contestLive()) { $('oCode').textContent = vcode(name, final); $('oCode').parentElement.querySelectorAll('.lbl')[1].textContent = 'Verification Code'; }
@@ -534,12 +549,12 @@ function CACChip(actx, out) {
     $('acode').value = ''; $('acode').placeholder = 'Code saved on this phone'; $('getcode').style.display = 'none';
   }
   function openSignup() {
-    $('suForm').classList.remove('hidden'); $('suDone').classList.add('hidden'); $('suErr').textContent = '';
+    $('suForm').classList.remove('hidden'); $('suDone').classList.add('hidden'); $('suErr').textContent = ''; $('suSub').textContent = 'Join the CAC Tribe and we\'ll email your access code in about a minute.';
     $('over').classList.add('hidden'); $('signup').classList.remove('hidden');
   }
   $('getCodeLink').onclick = e => { e.preventDefault(); openSignup(); };
   $('oGetCode').onclick = openSignup;
-  $('suBack').onclick = () => { $('signup').classList.add('hidden'); if (st === 'over') $('over').classList.remove('hidden'); };
+  $('suBack').onclick = () => { $('signup').classList.add('hidden'); if (st === 'over') $('over').classList.remove('hidden'); else $('title').classList.remove('hidden'); };
   function toE164(p) {
     const d = String(p).replace(/[^0-9]/g, '');
     if (d.length === 10) return '+1' + d;
