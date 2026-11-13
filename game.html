@@ -66,6 +66,21 @@
   #signup{justify-content:flex-start;overflow-y:auto;touch-action:pan-y;padding-top:40px}
   label.sms{display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:10.5px;line-height:1.4;color:#bbb;margin:12px 0 4px}
   label.sms input{width:18px;height:18px;flex-shrink:0;accent-color:var(--pink);margin-top:1px}
+  .legend{width:100%;max-width:340px;margin:0 0 12px;text-align:left}
+  .legend summary{list-style:none;cursor:pointer;font-family:'Bebas Neue',Impact,sans-serif;font-size:24px;letter-spacing:1px;color:var(--gold);text-align:center;border:2px solid var(--gold);border-radius:10px;padding:6px 10px}
+  .legend summary::-webkit-details-marker{display:none}
+  .legend summary .ar{display:inline-block;transition:transform .2s;margin-left:6px}
+  .legend[open] summary .ar{transform:rotate(180deg)}
+  .legend .lg{border:1px solid rgba(255,210,63,.35);border-top:0;border-radius:0 0 10px 10px;padding:8px 12px 10px;margin-top:-6px;padding-top:14px}
+  .legend h4{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:1px;margin:10px 0 4px}
+  .legend h4.c{color:var(--green)} .legend h4.b{color:var(--gold)} .legend h4.d{color:#ff4d6d}
+  .legend .row{display:flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px;line-height:1.35;color:#ddd}
+  .legend .row:last-child{border-bottom:0}
+  .legend .ic{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;border-radius:50%;background:rgba(255,77,109,.14)}
+  .legend .ic.g{background:rgba(255,210,63,.14)} .legend .ic img{width:34px;height:34px;object-fit:contain}
+  .legend .bill{width:38px;height:20px;flex-shrink:0;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.35)}
+  .legend .row b{color:#fff} .legend .pts{margin-left:auto;font-weight:700;color:var(--gold);white-space:nowrap}
+  .legend .note{font-size:11.5px;color:var(--lav);margin:6px 0 0;line-height:1.4}
   .choice p{max-width:330px;font-size:14px;line-height:1.5;color:#ddd}
 </style>
 </head>
@@ -88,13 +103,20 @@
     <div class="getcode" id="getcode">No code yet? <a href="#" id="getCodeLink">Get your free code</a> to make your scores count and play as much as you want. Without one you get 3 free practice runs a day.</div>
     <label class="age"><input id="age" type="checkbox"> I am 18 or older</label>
     <div class="err" id="err"></div>
+    <details class="legend" id="legend">
+      <summary>What Everything Does <span class="ar">▾</span></summary>
+      <div class="lg">
+        <h4 class="c">Catch The Money</h4>
+<div class="row"><div class="bill" style="background:#3ddc84">$1</div><div><b>$1 bill</b></div><div class="pts">+10</div></div><div class="row"><div class="bill" style="background:#2fbf71">$5</div><div><b>$5 bill</b></div><div class="pts">+50</div></div><div class="row"><div class="bill" style="background:#22a35e">$20</div><div><b>$20 bill</b></div><div class="pts">+200</div></div><div class="row"><div class="bill" style="background:#1d8a50;height:26px">$100</div><div><b>$100 stack</b></div><div class="pts">+1,000</div></div>
+        <h4 class="b">Bonuses</h4>
+<div class="row"><div class="ic g"><img id="lgBook" alt=""></div><div><b>CAC Bookbag</b><br>Shows up every so often. Grab it.</div><div class="pts">+3,000</div></div><div class="row"><div class="ic g"><img id="lgBuhzz" alt=""></div><div><b>Buhzz</b><br>Double points for 6 seconds. He travels with drama on both sides.</div><div class="pts">+2,500</div></div><div class="row"><div class="ic g">💰</div><div><b>The Bag</b><br>Rare. Guarded by three hazards. Only the brave.</div><div class="pts">+5,000</div></div>
+        <h4 class="d">Dodge The Drama</h4>
+<div class="row"><div class="ic ">🎩</div><div><b>Trick</b><br>Strike. Don't fall for it.</div></div><div class="row"><div class="ic ">🥺</div><div><b>Simp</b><br>Strike. Too clingy.</div></div><div class="row"><div class="ic ">👶</div><div><b>Baby</b><br>Strike, and it slows you down.</div></div><div class="row"><div class="ic ">🧢</div><div><b>Baby Daddy</b><br>Strike, and he brought the baby with him.</div></div><div class="row"><div class="ic ">🍾</div><div><b>Liquor</b><br>Strike, and you get tipsy. Your controls flip.</div></div><div class="row"><div class="ic ">🚬</div><div><b>Cigarette</b><br>Strike. Secondhand smoke.</div></div><div class="row"><div class="ic ">🪫</div><div><b>Broke Man</b><br>Strike, and he takes 15% of your score.</div></div><div class="row"><div class="ic ">🤢</div><div><b>Bad Breath</b><br>Strike, and it fogs up your screen. Whew chile.</div></div><div class="row"><div class="ic ">😒</div><div><b>Hater</b><br>Strike. Pure jealousy.</div></div>
+        <p class="note">Three strikes and you're out. Make it to midnight and you can stay out past curfew for triple points, but one hit and you lose everything you made after midnight.</p>
+      </div>
+    </details>
     <button class="btn" id="play">Play</button>
-    <div class="how" style="margin-top:14px">
-      Slide your finger to move Luv Bug.<br>
-      Catch the <b>money</b>. Dodge the drama. Three strikes and you're out.<br>
-      Grab the <b>CAC Bookbag</b> for 3,000. Catch <b>Buhzz</b> for double points. Snatch <b>The Bag</b> if you're brave.<br>
-      Make it to <b>midnight</b> and you get a choice. Go home, or stay out past curfew for triple points and risk it all.
-    </div>
+    <div class="how" style="margin-top:14px">Slide your finger to move Luv Bug. Catch the <b>money</b>, dodge the drama. Three strikes and you're out. Make it to <b>midnight</b> for a surprise.</div>
     <div class="lb" id="lb"><h3>Leaderboard</h3><ol id="lbList"></ol><div class="upd" id="lbUpd"></div></div>
     <div class="links"><a href="rules.html" target="_blank">Official Rules</a></div>
   </div>
@@ -306,6 +328,7 @@ function CACChip(actx, out) {
   }
 
 
+  try { $('lgBook').src = imgBook.src; $('lgBuhzz').src = imgBuhzz.src; } catch (e) {}
   // ====== CONTEST SETTINGS ======
   // Leaderboard: update weekly. Format: ['igusername', score]
   const LEADERS = [];
